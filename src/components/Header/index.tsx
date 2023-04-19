@@ -25,6 +25,9 @@ export default function Header() {
           className="dropdown-content menu menu-compact mt-3 w-52 rounded-md bg-neutral-100 p-2 shadow"
         >
           <li>
+            <Link href="/dashboard">Dashboard</Link>
+          </li>
+          <li>
             <Link href="/calendar">Calendar</Link>
           </li>
           <li>

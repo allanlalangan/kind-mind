@@ -1,37 +1,37 @@
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { Editor } from 'react-draft-wysiwyg';
-import { EditorState } from 'draft-js';
-import { useState } from 'react';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState } from "draft-js";
+import { useState } from "react";
 
 const toolbarOptions = {
-  options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign'],
+  options: ["inline", "blockType", "fontSize", "list", "textAlign"],
   inline: {
     inDropdown: false,
     className: undefined,
     component: undefined,
     dropdownClassName: undefined,
     options: [
-      'bold',
-      'italic',
-      'underline',
-      'strikethrough',
-      'monospace',
-      'superscript',
-      'subscript',
+      "bold",
+      "italic",
+      "underline",
+      "strikethrough",
+      "monospace",
+      "superscript",
+      "subscript",
     ],
   },
   blockType: {
     inDropdown: true,
     options: [
-      'Normal',
-      'H1',
-      'H2',
-      'H3',
-      'H4',
-      'H5',
-      'H6',
-      'Blockquote',
-      'Code',
+      "Normal",
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5",
+      "H6",
+      "Blockquote",
+      "Code",
     ],
   },
   fontSize: {
@@ -43,7 +43,7 @@ const toolbarOptions = {
     className: undefined,
     component: undefined,
     dropdownClassName: undefined,
-    options: ['unordered', 'ordered'],
+    options: ["unordered", "ordered"],
   },
 };
 
@@ -55,9 +55,9 @@ export default function TextEditor() {
       editorState={editorState}
       onEditorStateChange={(state) => setEditorState(state)}
       toolbar={toolbarOptions}
-      wrapperClassName='flex flex-col w-full'
-      toolbarClassName='!text-black !mb-0 !rounded-t !border-x !border-t !border-b-0 !border-primary !shadow !z-10 !pb-2'
-      editorClassName='bg-secondary p-4 h-full min-h-[300px] rounded-b border-primary border-l border-r border-b border-t-0'
+      wrapperClassName="flex flex-col"
+      toolbarClassName="!text-black !mb-0 !rounded-t-lg !border-x !border-t !border-b-0 !border-primary !shadow !z-10 !pb-2"
+      editorClassName="bg-secondary p-4 h-full min-h-[300px] rounded-b-lg border-primary border-l border-r border-b border-t-0"
     />
   );
 }

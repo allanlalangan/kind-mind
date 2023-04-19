@@ -4,35 +4,43 @@ function JournalEntryForm() {
   return (
     <form
       onSubmit={(e) => e.preventDefault}
-      className="col-span-6 flex flex-col rounded-md bg-base-100 p-4"
+      className="col-span-6 flex flex-col rounded-lg bg-base-100 p-8"
     >
       <h2 className="mb-2 rounded-md bg-neutral-100 p-4 text-2xl font-semibold text-primary shadow-sm">
         New Journal Entry
       </h2>
       <fieldset className="grid grid-cols-12 gap-4 px-4">
-        <legend className="py-2 text-lg">Select or add a new category</legend>
+        <legend className="py-2 text-lg font-semibold tracking-wide">
+          Category
+        </legend>
         <p className="col-span-6 mb-4 flex w-full flex-col">
-          <label className="" htmlFor="newCategory">
-            Category
+          <label
+            className="pb-1 text-xs uppercase tracking-wide"
+            htmlFor="newCategory"
+          >
+            Create Category
           </label>
-          <span className="input-group flex w-full">
+          <span className="input-group-sm input-group flex w-full">
             <input
               placeholder="Add a new category"
-              className="input-primary input w-3/4 bg-secondary"
+              className="input-primary input input-sm w-3/4 bg-secondary"
               type="text"
               name="newCategory"
               id="newCategory"
             />
-            <button className="btn-primary btn w-1/4">Add</button>
+            <button className="btn-primary btn-sm btn w-1/4">Add</button>
           </span>
         </p>
-        <p className="col-span-6 mb-4 flex w-full flex-col">
-          <label className="" htmlFor="newCategory">
-            Select a category
+        <p className="col-span-6 flex w-full flex-col">
+          <label
+            className="pb-1 text-xs uppercase tracking-wide"
+            htmlFor="newCategory"
+          >
+            Select Category
           </label>
 
           <select
-            className="select-primary select w-full bg-secondary"
+            className="select-primary select select-sm w-full bg-secondary"
             name="category"
             id="category"
           >
@@ -43,7 +51,10 @@ function JournalEntryForm() {
         </p>
       </fieldset>
       <p className="mb-4 flex w-full flex-col px-4">
-        <label className="py-2 text-lg" htmlFor="body">
+        <label
+          className="py-2 text-lg font-semibold tracking-wide"
+          htmlFor="body"
+        >
           Entry Text
         </label>
         <TextEditor />
