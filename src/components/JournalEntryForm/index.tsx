@@ -3,16 +3,14 @@ import TextEditor from "../TextEditor";
 function JournalEntryForm() {
   return (
     <form
-      onSubmit={(e) => e.preventDefault}
-      className="col-span-6 flex flex-col rounded-lg bg-base-100 p-8"
+      onSubmit={(e) => e.preventDefault()}
+      className="col-span-12 flex flex-col rounded-lg bg-base-100 p-4 lg:col-span-6 lg:p-8"
     >
       <h2 className="mb-2 rounded-md bg-neutral-100 p-4 text-2xl font-semibold text-primary shadow-sm">
         New Journal Entry
       </h2>
       <fieldset className="grid grid-cols-12 gap-4 px-4">
-        <legend className="py-2 text-lg font-semibold tracking-wide">
-          Category
-        </legend>
+        <legend className="py-2 tracking-wider">Category</legend>
         <p className="col-span-6 mb-4 flex w-full flex-col">
           <label
             className="pb-1 text-xs uppercase tracking-wide"
@@ -51,10 +49,7 @@ function JournalEntryForm() {
         </p>
       </fieldset>
       <p className="mb-4 flex w-full flex-col px-4">
-        <label
-          className="py-2 text-lg font-semibold tracking-wide"
-          htmlFor="body"
-        >
+        <label className="py-2 tracking-wider" htmlFor="body">
           Entry Text
         </label>
         <TextEditor />

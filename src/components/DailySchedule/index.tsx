@@ -3,7 +3,7 @@ import Event from "../Event";
 
 const DailySchedule = ({ selectedDay, selectedDayMeetings }) => {
   return (
-    <section className="col-span-6 row-span-1 p-8">
+    <section className="col-span-12 row-span-1 p-8 md:col-span-6">
       <h2 className="py-4 text-2xl font-semibold">
         Schedule for{" "}
         <time dateTime={format(selectedDay, "yyyy-MM-dd")}>

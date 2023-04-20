@@ -92,7 +92,7 @@ const CalendarPage = () => {
           selectedDay={selectedDay}
           selectedDayMeetings={selectedDayMeetings}
         />
-        <section className="col-span-6 col-start-7 row-span-1 p-8">
+        <section className="col-span-12 row-span-1 p-8 md:col-span-6 lg:col-start-7">
           <h2 className="mb-2 tracking-wider">Create New Event</h2>
           <div className="grid grid-cols-12 gap-2">
             <button className="btn-secondary btn-sm btn col-span-6">
