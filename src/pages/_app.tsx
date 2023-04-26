@@ -6,14 +6,16 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import Header from "~/components/Header";
+import { useState } from "react";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  const [navIsOpen, setNavIsOpen] = useState(true);
   return (
     <SessionProvider session={session}>
-      <Header />
+      <Header navIsOpen={navIsOpen} setNavIsOpen={setNavIsOpen} />
       <Component {...pageProps} />
     </SessionProvider>
   );

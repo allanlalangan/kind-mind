@@ -9,7 +9,7 @@ const JournalEntryForm = dynamic(
 export default function JournalPage() {
   return (
     <main>
-      <section className="grid grid-cols-12 gap-4 p-4">
+      <section className="grid grid-cols-12 gap-4">
         <JournalEntryForm />
       </section>
     </main>
