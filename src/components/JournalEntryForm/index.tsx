@@ -4,7 +4,7 @@ function JournalEntryForm() {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="col-span-12 flex flex-col rounded-lg bg-base-100 p-4 lg:col-span-6 lg:p-8"
+      className="col-span-12 flex flex-col rounded-lg bg-base-100 p-2 sm:p-4 lg:col-span-6 xl:p-8"
     >
       <h2 className="mb-2 rounded-md bg-neutral-100 p-4 text-2xl font-semibold text-primary shadow-sm">
         New Journal Entry

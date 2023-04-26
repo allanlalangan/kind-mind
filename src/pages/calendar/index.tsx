@@ -74,7 +74,7 @@ const CalendarPage = () => {
   );
   return (
     <>
-      <main className="grid grid-cols-12 gap-4 p-4">
+      <main className="grid grid-cols-12 gap-4">
         <Calendar
           firstDayCurrentMonth={firstDayCurrentMonth}
           days={days}
