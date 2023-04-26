@@ -3,18 +3,14 @@ import {
   eachDayOfInterval,
   endOfMonth,
   format,
-  getDay,
-  isEqual,
   isSameDay,
-  isSameMonth,
-  isToday,
   parse,
   parseISO,
   startOfToday,
 } from "date-fns";
 import { useState } from "react";
 import Calendar from "~/components/Calendar";
-import DailySchedule from "~/components/DailySchedule";
+import Event from "~/components/Event";
 
 const events = [
   {
@@ -88,12 +84,27 @@ const CalendarPage = () => {
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
-        <DailySchedule
-          selectedDay={selectedDay}
-          selectedDayMeetings={selectedDayMeetings}
-        />
+        <section className="col-span-12 row-span-1 p-8 md:col-span-6">
+          <h2 className="py-4 text-2xl font-semibold">
+            Schedule for{" "}
+            <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
+              {format(selectedDay, "MMM dd, yyy")}
+            </time>
+          </h2>
+          <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
+            {selectedDayMeetings.length > 0 ? (
+              selectedDayMeetings.map((meeting) => (
+                <Event meeting={meeting} key={meeting.id} />
+              ))
+            ) : (
+              <p>No events for today.</p>
+            )}
+          </ol>
+        </section>
         <section className="col-span-12 row-span-1 p-8 md:col-span-6 lg:col-start-7">
-          <h2 className="mb-2 tracking-wider">Create New Event</h2>
+          <h2 className="mb-2 font-semibold uppercase tracking-wider">
+            Create New Event
+          </h2>
           <div className="grid grid-cols-12 gap-2">
             <button className="btn-secondary btn-sm btn col-span-6">
               Add Activity
