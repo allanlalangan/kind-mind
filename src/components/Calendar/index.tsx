@@ -34,7 +34,7 @@ type CalendarProps = {
   setSelectedDay: (date: Date) => void;
 };
 
-function Calendar({
+const Calendar = ({
   firstDayCurrentMonth,
   days,
   events,
@@ -42,9 +42,9 @@ function Calendar({
   nextMonth,
   selectedDay,
   setSelectedDay,
-}: CalendarProps) {
+}: CalendarProps) => {
   return (
-    <figure className="col-span-12 row-span-2 flex flex-col rounded-lg bg-base-100 p-8 shadow lg:col-span-6">
+    <figure className="col-span-12 row-span-2 flex min-h-screen flex-col rounded-lg bg-base-100 p-8 shadow lg:col-span-6">
       <div className="flex items-center rounded-md bg-neutral-100 p-4 shadow-sm">
         <h2 className="flex-auto text-2xl font-semibold text-gray-900">
           {format(firstDayCurrentMonth, "MMMM yyyy")}
@@ -155,6 +155,6 @@ function Calendar({
       </div>
     </figure>
   );
-}
+};
 
 export default Calendar;
