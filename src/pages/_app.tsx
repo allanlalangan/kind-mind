@@ -7,6 +7,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import Header from "~/components/Header";
 import { useState } from "react";
+import Sidebar from "~/components/Sidebar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -16,6 +17,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <Header navIsOpen={navIsOpen} setNavIsOpen={setNavIsOpen} />
+      <Sidebar />
       <Component {...pageProps} />
     </SessionProvider>
   );
