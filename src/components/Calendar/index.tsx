@@ -1,19 +1,12 @@
 import {
-  add,
-  eachDayOfInterval,
-  endOfMonth,
   format,
   getDay,
   isEqual,
   isSameDay,
   isSameMonth,
   isToday,
-  parse,
   parseISO,
-  startOfToday,
 } from "date-fns";
-import Event from "~/components/Event";
-import { useState } from "react";
 
 const colStartClasses = [
   "",
@@ -25,9 +18,21 @@ const colStartClasses = [
   "col-start-7",
 ];
 
-function classNames(...classes) {
+function classNames(...classes: (false | string | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
+
+import type { Event as EventType } from "~/components/Event";
+
+type CalendarProps = {
+  firstDayCurrentMonth: Date;
+  days: Date[];
+  events: EventType[];
+  previousMonth: () => void;
+  nextMonth: () => void;
+  selectedDay: Date;
+  setSelectedDay: (date: Date) => void;
+};
 
 function Calendar({
   firstDayCurrentMonth,
@@ -37,7 +42,7 @@ function Calendar({
   nextMonth,
   selectedDay,
   setSelectedDay,
-}) {
+}: CalendarProps) {
   return (
     <figure className="col-span-12 row-span-2 flex flex-col rounded-lg bg-base-100 p-8 shadow lg:col-span-6">
       <div className="flex items-center rounded-md bg-neutral-100 p-4 shadow-sm">
@@ -50,7 +55,21 @@ function Calendar({
           className="btn-ghost btn-circle btn"
         >
           <span className="sr-only">Previous month</span>
-          <HeroiconsChevronLeft size={1.5} />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={"1rem"}
+            height={"1rem"}
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            ></path>
+          </svg>
         </button>
         <button
           onClick={nextMonth}
@@ -58,7 +77,21 @@ function Calendar({
           className="btn-ghost btn-circle btn"
         >
           <span className="sr-only">Next month</span>
-          <HeroiconsChevronRight size={1.5} />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={"1rem"}
+            height={"1rem"}
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              d="m8.25 4.5l7.5 7.5l-7.5 7.5"
+            ></path>
+          </svg>
         </button>
       </div>
       <div className="mt-10 grid grid-cols-7 rounded-t bg-primary py-1 text-center font-semibold leading-6 text-primary-content">
@@ -70,13 +103,13 @@ function Calendar({
         <div>F</div>
         <div>S</div>
       </div>
-      <div className="mt-2 grid h-96 grid-cols-7 rounded-b border border-primary bg-neutral-100 text-sm">
+      <div className="mt-2 grid h-full grid-cols-7 rounded-b border border-primary bg-neutral-100 text-sm">
         {days.map((day, dayIdx) => (
           <div
             key={day.toString()}
             className={classNames(
               dayIdx === 0 && colStartClasses[getDay(day)],
-              "py-1.5"
+              "h-full w-full py-1.5"
             )}
           >
             <button
@@ -125,45 +158,3 @@ function Calendar({
 }
 
 export default Calendar;
-
-function HeroiconsChevronLeft(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={`${props.size}rem`}
-      height={`${props.size}rem`}
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-        d="M15.75 19.5L8.25 12l7.5-7.5"
-      ></path>
-    </svg>
-  );
-}
-
-function HeroiconsChevronRight(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={`${props.size}rem`}
-      height={`${props.size}rem`}
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-        d="m8.25 4.5l7.5 7.5l-7.5 7.5"
-      ></path>
-    </svg>
-  );
-}
