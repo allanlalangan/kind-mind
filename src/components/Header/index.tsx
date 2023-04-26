@@ -7,23 +7,13 @@ type HeaderProps = {
 
 export default function Header({ navIsOpen, setNavIsOpen }: HeaderProps) {
   return (
-    <header className="mb-4 rounded-lg bg-neutral-100 p-2 shadow-sm">
-      <section>
-        <Link
-          href="/"
-          className="btn-ghost btn text-2xl normal-case text-primary"
-        >
-          kindMind
-        </Link>
-      </section>
-      <nav className="flex px-4">
-        <Link className="mr-2 underline" href="/calendar">
-          Calendar
-        </Link>
-        <Link className="mr-2 underline" href="/journal">
-          Journal
-        </Link>
-      </nav>
+    <header className="fixed left-2 right-2 top-2 flex h-16 items-center justify-center rounded-lg bg-neutral-100 shadow-sm md:justify-start">
+      <Link
+        href="/"
+        className="btn-ghost btn mx-2 text-2xl normal-case text-primary"
+      >
+        kindMind
+      </Link>
     </header>
   );
 }
