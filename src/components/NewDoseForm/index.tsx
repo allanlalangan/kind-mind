@@ -14,7 +14,7 @@ const NewDoseForm = () => {
       <h3 className="mb-2 rounded-md bg-neutral-100 p-4 text-2xl font-semibold text-primary shadow-sm">
         Schedule New Dose
       </h3>
-      <p className="col-span-6 mb-8 flex h-fit flex-col">
+      <p className="col-span-6 mb-8 flex flex-col">
         <label className="text-lg tracking-wide" htmlFor="name">
           Name
         </label>
@@ -25,11 +25,11 @@ const NewDoseForm = () => {
           id="name"
         />
       </p>
-      <fieldset className="col-span-12 mb-8 grid grid-cols-2 gap-2">
+      <fieldset className="col-span-12 mb-8 flex items-center justify-evenly">
         <legend className="text-lg tracking-wide">Type</legend>
 
         <label
-          className="col-span-1 flex cursor-pointer items-center justify-evenly"
+          className="flex cursor-pointer items-center justify-evenly"
           htmlFor="supplement"
         >
           <input
@@ -39,11 +39,11 @@ const NewDoseForm = () => {
             name="type"
             value="supplement"
           />
-          <span className="label">Supplement</span>
+          <span className="label ml-2">Supplement</span>
         </label>
 
         <label
-          className="col-span-1 flex cursor-pointer items-center justify-evenly"
+          className="flex cursor-pointer items-center justify-evenly"
           htmlFor="medication"
         >
           <input
@@ -53,10 +53,10 @@ const NewDoseForm = () => {
             name="type"
             value="medication"
           />
-          <span className="label">Medication</span>
+          <span className="label ml-2">Medication</span>
         </label>
       </fieldset>
-      <p className="col-span-6 mb-8 flex h-fit flex-col">
+      <p className="col-span-6 mb-8 flex flex-col">
         <label className="text-lg tracking-wide" htmlFor="description">
           Description
         </label>
@@ -72,7 +72,7 @@ const NewDoseForm = () => {
         <legend className="-mx-4 text-lg tracking-wide">Schedule</legend>
 
         <section className="col-span-6 flex flex-col">
-          <p className="col-span-6 mb-8 flex h-fit flex-col">
+          <p className="col-span-6 mb-8 flex flex-col">
             <label className="text-sm tracking-wide" htmlFor="startDate">
               Start Date
             </label>
@@ -83,7 +83,7 @@ const NewDoseForm = () => {
               id="startDate"
             />
           </p>
-          <p className="col-span-6 mb-8 flex h-fit flex-col">
+          <p className="col-span-6 mb-8 flex flex-col">
             <label className="text-sm tracking-wide" htmlFor="endDate">
               End Date (optional)
             </label>
