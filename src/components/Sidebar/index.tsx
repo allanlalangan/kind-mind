@@ -7,6 +7,14 @@ const Sidebar = () => {
         <li>
           <Link
             className="btn-ghost btn-xs btn tracking-wide md:mb-2"
+            href="/dashboard"
+          >
+            Dashboard
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="btn-ghost btn-xs btn tracking-wide md:mb-2"
             href="/calendar"
           >
             Calendar
