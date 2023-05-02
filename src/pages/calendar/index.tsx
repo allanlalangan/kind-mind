@@ -74,7 +74,7 @@ const CalendarPage = () => {
   );
   return (
     <>
-      <main className="mb-16 ml-2 mr-2 mt-20 grid grid-cols-12 gap-4 md:ml-32">
+      <section className="grid grid-cols-12 gap-4">
         <Calendar
           firstDayCurrentMonth={firstDayCurrentMonth}
           days={days}
@@ -114,7 +114,7 @@ const CalendarPage = () => {
             </button>
           </div>
         </section>
-      </main>
+      </section>
     </>
   );
 };
