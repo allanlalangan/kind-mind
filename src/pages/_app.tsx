@@ -18,7 +18,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <Header navIsOpen={navIsOpen} setNavIsOpen={setNavIsOpen} />
       <Sidebar />
-      <Component {...pageProps} />
+      <main className="col-span-12 row-start-2 row-end-[12] overflow-y-scroll rounded-lg border border-primary bg-base-200 p-4 shadow md:col-span-11 md:col-start-2 md:row-end-[13]">
+        <Component {...pageProps} />
+      </main>
     </SessionProvider>
   );
 };
