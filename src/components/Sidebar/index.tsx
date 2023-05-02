@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Sidebar = () => {
   return (
-    <aside className="col-span-12 row-start-[12] flex flex-col items-center justify-center rounded-lg bg-base-100 p-2 shadow md:col-span-1 md:row-start-2 md:row-end-[13] md:justify-start">
+    <aside className="col-span-12 row-start-2 flex flex-col items-center justify-center rounded-lg bg-base-100 p-2 shadow md:col-span-1 md:row-start-2 md:row-end-[13] md:justify-start">
       <ul className="flex items-center md:flex-col">
         <li>
           <Link
