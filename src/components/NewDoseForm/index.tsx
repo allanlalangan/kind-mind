@@ -10,7 +10,7 @@ const weekdays = [
 
 const NewDoseForm = () => {
   return (
-    <form className="col-span-12 flex flex-col rounded-lg bg-base-100 p-2 sm:p-4 lg:col-span-8 xl:p-8">
+    <form className="flex flex-col rounded-lg bg-base-100 p-2 sm:p-4 lg:w-1/2 xl:p-8">
       <h3 className="mb-2 rounded-md bg-neutral-100 p-4 text-2xl font-semibold text-primary shadow-sm">
         Schedule New Dose
       </h3>
