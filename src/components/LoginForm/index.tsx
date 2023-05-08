@@ -10,9 +10,11 @@ const LoginForm = () => {
     >
       {/* <button onClick={} className="btn-primary btn mb-2">Login with Github</button> */}
       <button
-        onClick={() => {
-          signIn("discord", { callbackUrl: "http://localhost:3000/dashboard" });
-        }}
+        onClick={() =>
+          void signIn("discord", {
+            callbackUrl: "http://localhost:3000/dashboard",
+          })
+        }
         className="btn-primary btn mb-2"
       >
         Login with Discord
