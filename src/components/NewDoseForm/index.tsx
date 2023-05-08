@@ -10,7 +10,12 @@ const weekdays = [
 
 const NewDoseForm = () => {
   return (
-    <form className="flex flex-col rounded-lg bg-base-100 p-2 sm:p-4 lg:w-1/3 xl:p-8">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+      className="flex flex-col rounded-lg bg-base-100 p-2 sm:p-4 lg:w-1/3 xl:p-8"
+    >
       <h3 className="mb-4 rounded-md bg-neutral-100 p-4 text-2xl font-semibold text-primary shadow-sm">
         Schedule Dose
       </h3>
