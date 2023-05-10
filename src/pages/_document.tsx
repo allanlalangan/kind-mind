@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="max-h-screen bg-base-200">
+      <body className="relative max-h-screen bg-gradient-to-b from-secondary to-primary-focus">
         <Main />
         <NextScript />
       </body>

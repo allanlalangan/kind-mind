@@ -41,15 +41,15 @@ model Account {
 }
 
 model User {
-    id            String       @id @default(cuid())
-    name          String?
-    email         String?      @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    supplements   Supplement[]
-    medications   Medication[]
+    id             String         @id @default(cuid())
+    name           String?
+    email          String?        @unique
+    emailVerified  DateTime?
+    image          String?
+    accounts       Account[]
+    sessions       Session[]
+    doses          Dose[]
+    journalEntries JournalEntry[]
 }
 
 model Session {
@@ -68,41 +68,37 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-enum Weekday {
-    Sunday
-    Monday
-    Tuesday
-    Wednesday
-    Thursday
-    Friday
-    Saturday
+enum DoseType {
+    supplement
+    medication
 }
 
-model Day {
-    id                   String       @id @default(cuid())
-    name                 Weekday
-    scheduledSuppements  Supplement[]
-    scheduledMedications Medication[]
+model Dose {
+    id           String   @id @default(cuid())
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+    name         String
+    type         DoseType
+    description  String
+    startDate    DateTime
+    endDate      DateTime
+    onSundays    Boolean
+    onMondays    Boolean
+    onTuesdays   Boolean
+    onWednesdays Boolean
+    onThursdays  Boolean
+    onFridays    Boolean
+    onSaturdays  Boolean
+    userId       String
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Supplement {
-    id          String   @id @default(cuid())
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-    name        String
-    description String
-    onDays      Day[]
-    userId      String
-    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model Medication {
-    id          String   @id @default(cuid())
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-    name        String
-    description String
-    onDays      Day[]
-    userId      String
-    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model JournalEntry {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    title     String
+    content   Json
+    userId    String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
