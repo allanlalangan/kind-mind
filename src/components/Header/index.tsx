@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Header() {
   const session = useSession();
   return (
-    <header className="fixed left-2 right-2 top-2 col-span-12 row-span-1 flex items-center justify-between rounded-lg bg-neutral-100 p-2 shadow-sm md:static md:justify-between">
+    <header className="fixed left-2 right-2 top-2 z-10 col-span-12 row-span-1 flex items-center justify-between rounded-lg bg-neutral-100 p-2 shadow-sm md:static md:justify-between">
       <Link
         href="/"
         className="btn-ghost btn mx-2 text-2xl normal-case text-primary"
