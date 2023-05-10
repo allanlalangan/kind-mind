@@ -5,8 +5,4 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["garden"],
-  },
 } satisfies Config;
