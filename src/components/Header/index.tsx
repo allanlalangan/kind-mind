@@ -7,33 +7,30 @@ import Link from "next/link";
 export default function Header() {
   const session = useSession();
   return (
-    <header className="fixed left-2 right-2 top-2 z-10 col-span-12 row-span-1 flex items-center justify-between rounded-lg bg-neutral-100 p-2 shadow-sm md:static md:justify-between">
-      <Link
-        href="/"
-        className="btn-ghost btn mx-2 text-2xl normal-case text-primary"
-      >
+    <header className="fixed left-2 right-2 top-2 z-10 col-span-12 row-span-1 flex items-center justify-between rounded bg-base-100/40 p-2 shadow backdrop-blur-md md:static md:justify-between">
+      <Link href="/" className="text-primary mx-2 text-2xl normal-case">
         kindMind
       </Link>
       {!!session.data ? (
         <section className="flex items-center">
           <button
             onClick={() => void signOut({ callbackUrl: "/login" })}
-            className="btn-ghost btn-sm btn mx-2"
+            className="mx-2"
           >
             Logout
           </button>
-          <button className="btn-circle btn">
+          <button className="rounded-full">
             <Image
-              className="rounded-full"
+              className="h-8 w-8 rounded-full"
               alt={`${session?.data?.user?.name || "user"}'s avatar`}
               src={session?.data?.user?.image || ""}
-              width={200}
-              height={200}
+              width={100}
+              height={100}
             />
           </button>
         </section>
       ) : (
-        <Link href="/login" className="btn-ghost btn-sm btn mx-2">
+        <Link href="/login" className="mx-2">
           Login
         </Link>
       )}

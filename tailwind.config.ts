@@ -3,10 +3,14 @@ import { type Config } from "tailwindcss";
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
-  },
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["garden"],
+    extend: {
+      colors: ({ colors }) => ({
+        primary: colors.indigo,
+        secondary: colors.orange,
+        accent: colors.sky,
+        base: colors.gray,
+        neutral: colors.slate,
+      }),
+    },
   },
 } satisfies Config;

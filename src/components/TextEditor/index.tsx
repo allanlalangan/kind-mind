@@ -56,8 +56,8 @@ export default function TextEditor() {
       onEditorStateChange={(state) => setEditorState(state)}
       toolbar={toolbarOptions}
       wrapperClassName="flex flex-col"
-      toolbarClassName="!text-black !mb-0 !rounded-t-lg !border-x !border-t !border-b-0 !border-primary !shadow !z-10 !pb-2"
-      editorClassName="bg-secondary p-4 h-full min-h-[300px] rounded-b-lg border-primary border-l border-r border-b border-t-0"
+      toolbarClassName="!text-black !mb-0 !rounded-t !border-x !border-t !border-b-0 !border-primary !shadow !z-10 !pb-2"
+      editorClassName="bg-base-100/40 p-4 h-full min-h-[300px] rounded-b border-primary border-l border-r border-b border-t-0"
     />
   );
 }

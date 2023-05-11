@@ -8,9 +8,11 @@ import {
   parseISO,
   startOfToday,
 } from "date-fns";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import Calendar from "~/components/Calendar";
 import Event from "~/components/Event";
+import WeeklySchedule from "~/components/WeeklySchedule";
 
 const events = [
   {
@@ -49,6 +51,8 @@ const events = [
 ];
 
 const CalendarPage = () => {
+  const session = useSession();
+
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -74,7 +78,9 @@ const CalendarPage = () => {
   );
   return (
     <>
-      <section className="grid grid-cols-12 gap-4">
+      <h1 className="mb-4 text-4xl font-bold text-primary-600">Calendar</h1>
+      <WeeklySchedule />
+      <section className="mt-4 grid grid-cols-12">
         <Calendar
           firstDayCurrentMonth={firstDayCurrentMonth}
           days={days}
@@ -106,10 +112,10 @@ const CalendarPage = () => {
             Create New Event
           </h2>
           <div className="grid grid-cols-12 gap-2">
-            <button className="btn-secondary btn-sm btn col-span-6">
+            <button className="col-span-6 flex w-full justify-center rounded bg-base-100/40 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal tracking-wide transition hover:bg-accent-300 active:bg-accent-400">
               Add Activity
             </button>
-            <button className="btn-secondary btn-sm btn col-span-6">
+            <button className="col-span-6 flex w-full justify-center rounded bg-base-100/40 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal tracking-wide transition hover:bg-accent-300 active:bg-accent-400">
               Add Dose
             </button>
           </div>
