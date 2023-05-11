@@ -103,7 +103,7 @@ const Calendar = ({
         <div>F</div>
         <div>S</div>
       </div>
-      <div className="mt-2 grid h-full grid-cols-7 rounded-b bg-base-100/40 text-sm">
+      <div className="l mt-2 grid min-h-[50vh] grid-cols-7 rounded-b bg-base-100/40 text-sm">
         {days.map((day, dayIdx) => (
           <div
             key={day.toString()}

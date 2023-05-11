@@ -16,7 +16,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <Header />
       <Sidebar />
-      <main className="z-[1] col-span-12 row-start-2 row-end-[12] mt-4 overflow-y-scroll rounded bg-base-100/40 p-4 shadow-md backdrop-blur-md md:col-span-11 md:col-start-2 md:row-start-2 md:row-end-[13] md:mt-0">
+      {/* <main className="z-[1] col-span-12 row-start-2 row-end-[12] mt-4 overflow-y-scroll rounded bg-base-100/40 p-4 shadow-md backdrop-blur-md md:col-span-11 md:col-start-2 md:row-start-2 md:row-end-[13] md:mt-0"> */}
+      <main className="fixed bottom-16 left-2 right-2 top-16 overflow-y-scroll rounded bg-base-100/40 p-4 shadow-md md:bottom-2 md:left-40">
         <Component {...pageProps} />
       </main>
     </SessionProvider>
