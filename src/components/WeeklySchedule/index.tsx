@@ -19,7 +19,7 @@ export default function WeeklySchedule() {
 
   console.log(daysOfCurrentWeek);
   return (
-    <section className="w-full rounded bg-base-100/40 p-8 md:w-1/2 lg:w-full xl:w-3/4">
+    <section className="w-full rounded bg-base-100/40 p-2 shadow sm:p-4 md:w-1/2 lg:w-full xl:w-3/4 xl:p-8">
       <h2 className="mb-4 text-2xl font-semibold text-primary-500">
         This Week At a Glance
       </h2>
