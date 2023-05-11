@@ -6,7 +6,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="flex w-1/3 flex-col rounded bg-base-100/40 p-8"
+      className="m-auto flex w-full flex-col rounded bg-base-100/40 p-8 md:w-1/2"
     >
       <button
         onClick={() => {
@@ -15,7 +15,7 @@ const LoginForm = () => {
           });
           setIsLoading(true);
         }}
-        className="mb-2 flex w-full items-center justify-center rounded bg-violet-600 px-6 pb-2 pt-2.5 text-white transition hover:bg-violet-700 active:bg-violet-800 disabled:bg-slate-700/50"
+        className="flex w-full items-center justify-center rounded bg-violet-600 px-6 pb-2 pt-2.5 text-white transition hover:bg-violet-700 active:bg-violet-800 disabled:bg-slate-700/50"
       >
         {!isLoading ? (
           <>

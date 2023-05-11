@@ -9,8 +9,8 @@ export default function LoginPage() {
     router.push("/dashboard");
   }
   return (
-    <main className="flex items-center justify-center p-8">
+    <>
       <LoginForm />
-    </main>
+    </>
   );
 }
