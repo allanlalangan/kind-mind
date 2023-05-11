@@ -12,8 +12,10 @@ const LoginForm = () => {
         onClick={() => {
           void signIn("discord", {
             callbackUrl: "http://localhost:3000/dashboard",
+          }).then(() => {
+            setIsLoading(true);
           });
-          setIsLoading(true);
+          setIsLoading(false);
         }}
         className="flex w-full items-center justify-center rounded bg-violet-600 px-6 pb-2 pt-2.5 text-white transition hover:bg-violet-700 active:bg-violet-800 disabled:bg-slate-700/50"
       >
