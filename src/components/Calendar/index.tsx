@@ -44,9 +44,9 @@ const Calendar = ({
   setSelectedDay,
 }: CalendarProps) => {
   return (
-    <figure className="col-span-12 row-span-2 flex flex-col rounded-lg bg-base-100 p-2 shadow sm:p-4 lg:col-span-6 xl:p-8">
-      <div className="flex items-center rounded-md bg-neutral-100 p-4 shadow-sm">
-        <h2 className="flex-auto text-2xl font-semibold text-primary">
+    <figure className="col-span-12 row-span-2 flex flex-col rounded bg-base-100/40 p-2 shadow sm:p-4 lg:col-span-6 xl:p-8">
+      <div className="flex items-center rounded bg-base-100/40 p-4 shadow">
+        <h2 className="flex-auto text-2xl font-semibold text-primary-500">
           {format(firstDayCurrentMonth, "MMMM yyyy")}
         </h2>
         <button
@@ -94,7 +94,7 @@ const Calendar = ({
           </svg>
         </button>
       </div>
-      <div className="mt-10 grid grid-cols-7 rounded-t bg-primary py-1 text-center font-semibold leading-6 text-primary-content">
+      <div className="mt-10 grid grid-cols-7 rounded-t bg-primary-500 py-1 text-center font-semibold leading-6 text-white">
         <div>S</div>
         <div>M</div>
         <div>T</div>
@@ -103,7 +103,7 @@ const Calendar = ({
         <div>F</div>
         <div>S</div>
       </div>
-      <div className="mt-2 grid h-full grid-cols-7 rounded-b border border-primary bg-neutral-100 text-sm">
+      <div className="mt-2 grid h-full grid-cols-7 rounded-b bg-base-100/40 text-sm">
         {days.map((day, dayIdx) => (
           <div
             key={day.toString()}
@@ -116,25 +116,25 @@ const Calendar = ({
               type="button"
               onClick={() => setSelectedDay(day)}
               className={classNames(
-                isEqual(day, selectedDay) && "text-white",
+                isEqual(day, selectedDay) && !isToday(day) && "bg-primary-300",
                 !isEqual(day, selectedDay) &&
                   isToday(day) &&
-                  "text-accent-focus",
+                  "text-secondary-500",
                 !isEqual(day, selectedDay) &&
                   !isToday(day) &&
                   isSameMonth(day, firstDayCurrentMonth) &&
-                  "text-gray-900",
+                  "text-neutral-900",
                 !isEqual(day, selectedDay) &&
                   !isToday(day) &&
                   !isSameMonth(day, firstDayCurrentMonth) &&
-                  "text-gray-400",
+                  "text-neutral-400",
                 isEqual(day, selectedDay) &&
                   isToday(day) &&
-                  "bg-accent-focus text-accent-content",
+                  "bg-secondary-500 text-white",
                 isEqual(day, selectedDay) &&
                   !isToday(day) &&
                   "bg-primary-focus",
-                !isEqual(day, selectedDay) && "hover:bg-primary-content",
+                !isEqual(day, selectedDay) && "hover:bg-primary-300/50",
                 (isEqual(day, selectedDay) || isToday(day)) && "font-semibold",
                 "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
               )}
@@ -147,7 +147,7 @@ const Calendar = ({
               {events.some((meeting) =>
                 isSameDay(parseISO(meeting.startDatetime), day)
               ) && (
-                <div className="h-1 w-1 rounded-full bg-accent-content"></div>
+                <div className="h-1 w-1 rounded-full bg-secondary-600"></div>
               )}
             </div>
           </div>
