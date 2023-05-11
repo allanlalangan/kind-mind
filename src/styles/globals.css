@@ -6,11 +6,11 @@
 
 @layer base {
   #__next {
-    height: 100vh;
-    display: grid;
+    /* min-height: 100vh; */
+    /* display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr);
-    gap: 0.5rem;
+    grid-template-rows: repeat(12, 1fr); */
+    /* gap: 0.5rem; */
     padding: 0.5rem;
   }
 
