@@ -1,7 +1,14 @@
 import { type NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 
 const Home: NextPage = () => {
+  const session = useSession();
+  const router = useRouter();
+  if (!!session.data) {
+    router.push("/dashboard");
+  }
   return (
     <>
       <Head>
