@@ -10,14 +10,16 @@ const LoginForm = () => {
       className="m-auto flex w-full flex-col rounded bg-base-100/40 p-8 md:w-1/2"
     >
       <button
-        disabled={!!session?.data?.user || session?.status === "loading"}
+        disabled={
+          isLoading || !!session?.data?.user || session?.status === "loading"
+        }
         onClick={() => {
           void signIn("discord", {
             callbackUrl: "http://localhost:3000/dashboard",
           });
           setIsLoading(true);
         }}
-        className="flex w-full items-center justify-center rounded bg-violet-600 px-6 pb-2 pt-2.5 text-white transition hover:bg-violet-700 active:bg-violet-800 disabled:bg-slate-700/50"
+        className="flex w-full items-center justify-center rounded bg-violet-600 px-6 pb-2 pt-2.5 text-white transition hover:bg-violet-700 active:bg-violet-800 disabled:bg-slate-700/40"
       >
         {session.status === "loading" || isLoading ? (
           <svg
