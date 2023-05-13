@@ -27,7 +27,7 @@ export default function UserOptionsDropdown() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute -right-2 top-7 z-10 mt-2 w-36 origin-top-right divide-y divide-base-100 rounded bg-base-100/40 shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-md focus:outline-none">
+          <Menu.Items className="absolute -right-2 top-10 z-10 mt-2 w-36 origin-top-right divide-y divide-base-100 rounded bg-base-100/40 shadow-lg ring-1 ring-black ring-opacity-5 backdrop-blur-md focus:outline-none">
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
