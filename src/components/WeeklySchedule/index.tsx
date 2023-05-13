@@ -19,7 +19,7 @@ export default function WeeklySchedule() {
 
   console.log(daysOfCurrentWeek);
   return (
-    <section className="w-full rounded bg-base-100/40 p-2 shadow sm:p-4 md:w-1/2 lg:w-full xl:w-3/4 xl:p-8">
+    <section className="w-full rounded bg-base-100/40 p-2 shadow sm:p-4 md:w-1/2 lg:w-full xl:w-1/2">
       <h2 className="mb-4 text-2xl font-semibold text-primary-500">
         This Week At a Glance
       </h2>
@@ -33,12 +33,12 @@ export default function WeeklySchedule() {
                   : "bg-base-100/40 hover:bg-accent-100",
                 i === 0 && "rounded-t lg:rounded-l lg:rounded-tr-none",
                 i === 6 && "rounded-b lg:rounded-r lg:rounded-bl-none",
-                "col-span-12 flex flex-col p-4 shadow transition lg:col-span-1 lg:items-center"
+                "col-span-12 flex flex-col p-2 shadow transition lg:col-span-1 lg:items-center"
               )}
               key={day.toString()}
             >
-              <p>{format(day, "EE")}</p>
-              <p>{format(day, "MMM dd")}</p>
+              <p className="truncate">{format(day, "EE")}</p>
+              <p className="truncate">{format(day, "MMM dd")}</p>
             </button>
           );
         })}
