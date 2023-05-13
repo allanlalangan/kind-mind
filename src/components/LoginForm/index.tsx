@@ -1,4 +1,5 @@
 import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 import { useState } from "react";
 
 const LoginForm = () => {
@@ -7,8 +8,14 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="m-auto flex w-full flex-col rounded bg-base-100/40 p-8 md:w-1/2"
+      className="m-auto flex w-full flex-col items-center rounded p-8"
     >
+      <Link
+        href="/"
+        className="mb-2 text-2xl font-bold normal-case text-primary-800"
+      >
+        kindMind
+      </Link>
       <button
         disabled={
           isLoading || !!session?.data?.user || session?.status === "loading"
@@ -19,7 +26,7 @@ const LoginForm = () => {
           });
           setIsLoading(true);
         }}
-        className="flex w-full items-center justify-center rounded bg-violet-600 px-6 pb-2 pt-2.5 text-white transition hover:bg-violet-700 active:bg-violet-800 disabled:bg-slate-700/40"
+        className="flex w-64 items-center justify-center rounded bg-violet-600 px-6 pb-2 pt-2.5 text-white transition hover:bg-violet-700 active:bg-violet-800 disabled:bg-slate-700/40"
       >
         {session.status === "loading" || isLoading ? (
           <svg

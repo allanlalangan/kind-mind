@@ -44,7 +44,7 @@ const Calendar = ({
   setSelectedDay,
 }: CalendarProps) => {
   return (
-    <figure className="col-span-12 row-span-2 flex flex-col rounded bg-base-100/40 p-2 shadow sm:p-4 lg:col-span-6 xl:p-8">
+    <figure className="col-span-12 row-span-2 flex flex-col rounded bg-base-100/40 p-2 shadow sm:p-4 lg:col-span-6">
       <div className="flex items-center rounded bg-base-100/40 p-4 shadow">
         <h2 className="flex-auto text-2xl font-semibold text-primary-500">
           {format(firstDayCurrentMonth, "MMMM yyyy")}

@@ -5,21 +5,38 @@ import { SessionProvider } from "next-auth/react";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
-import Header from "~/components/Header";
-import Sidebar from "~/components/Sidebar";
+import { type ReactElement, type ReactNode } from "react";
+import { type NextPage } from "next";
+
+export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type MyAppProps = {
+  Component: {
+    getLayout?: (page: ReactElement) => ReactNode;
+  };
+  pageProps: {
+    session: Session | null;
+  };
+};
+
+type AppPropsWithLayout = MyAppProps & {
+  Component: NextPageWithLayout;
+};
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
-}) => {
+}: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout || ((page) => page);
   return (
     <SessionProvider session={session}>
-      <Header />
-      <Sidebar />
-      {/* <main className="z-[1] col-span-12 row-start-2 row-end-[12] mt-4 overflow-y-scroll rounded bg-base-100/40 p-4 shadow-md backdrop-blur-md md:col-span-11 md:col-start-2 md:row-start-2 md:row-end-[13] md:mt-0"> */}
-      <main className="fixed bottom-16 left-2 right-2 top-16 overflow-y-scroll rounded bg-base-100/40 p-4 shadow-md md:bottom-2 md:left-40">
-        <Component {...pageProps} />
-      </main>
+      {getLayout(
+        <>
+          <Component {...pageProps} />
+        </>
+      )}
     </SessionProvider>
   );
 };

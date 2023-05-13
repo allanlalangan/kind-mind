@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import LoginForm from "~/components/LoginForm";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -9,8 +9,8 @@ export default function LoginPage() {
     router.push("/dashboard");
   }
   return (
-    <>
+    <main className="h-full rounded bg-base-100/40">
       <LoginForm />
-    </>
+    </main>
   );
 }

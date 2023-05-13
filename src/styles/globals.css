@@ -6,12 +6,8 @@
 
 @layer base {
   #__next {
-    /* min-height: 100vh; */
-    /* display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr); */
-    /* gap: 0.5rem; */
-    padding: 0.5rem;
+    height: 100%;
+    display: flex;
   }
 
   body {

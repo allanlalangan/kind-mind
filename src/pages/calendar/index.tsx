@@ -11,8 +11,10 @@ import {
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import Calendar from "~/components/Calendar";
+import DashboardLayout from "~/components/DashboardLayout";
 import Event from "~/components/Event";
 import WeeklySchedule from "~/components/WeeklySchedule";
+import { type NextPageWithLayout } from "../_app";
 
 const events = [
   {
@@ -50,7 +52,7 @@ const events = [
   },
 ];
 
-const CalendarPage = () => {
+const CalendarPage: NextPageWithLayout = () => {
   const session = useSession();
 
   const today = startOfToday();
@@ -123,6 +125,10 @@ const CalendarPage = () => {
       </section>
     </>
   );
+};
+
+CalendarPage.getLayout = function getLayout(page) {
+  return <DashboardLayout>{page}</DashboardLayout>;
 };
 
 export default CalendarPage;
