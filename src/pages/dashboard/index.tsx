@@ -1,6 +1,9 @@
 import { useSession } from "next-auth/react";
+import { type ReactElement } from "react";
+import DashboardLayout from "~/components/DashboardLayout";
+import type { NextPageWithLayout } from "../_app";
 
-export default function DashboardPage() {
+const DashboardPage: NextPageWithLayout = () => {
   const session = useSession();
   if (!session.data) return <p>Please login to view your dashboard</p>;
   return (
@@ -10,4 +13,10 @@ export default function DashboardPage() {
       </h1>
     </>
   );
-}
+};
+
+DashboardPage.getLayout = function getLayout(page: ReactElement) {
+  return <DashboardLayout>{page}</DashboardLayout>;
+};
+
+export default DashboardPage;
