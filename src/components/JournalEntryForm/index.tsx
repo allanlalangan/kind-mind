@@ -1,14 +1,14 @@
-import TextEditor from "../TextEditor";
+import TipTapEditor from "../TipTapEditor";
 
 function JournalEntryForm() {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="col-span-12 flex flex-col rounded bg-base-100/40 p-2 sm:p-4 lg:col-span-6"
+      className="col-span-12 flex flex-col rounded p-2 sm:p-4"
     >
       <input
-        className="mb-2 rounded bg-base-100/40 p-4 text-2xl font-semibold text-primary-500 shadow placeholder:font-semibold placeholder:text-primary-500/50"
-        placeholder="Journal Entry Title"
+        className="mb-2 rounded bg-transparent p-4 text-4xl font-semibold text-primary-500 placeholder:font-semibold placeholder:text-primary-500/75"
+        placeholder="Entry Title..."
         type="text"
         name="title"
         id="title"
@@ -17,7 +17,7 @@ function JournalEntryForm() {
         <label className="hidden py-2" htmlFor="body">
           Entry Text
         </label>
-        <TextEditor />
+        <TipTapEditor />
       </div>
       <button
         type="submit"
