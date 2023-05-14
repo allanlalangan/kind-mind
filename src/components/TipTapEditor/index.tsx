@@ -14,11 +14,11 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   }
 
   return (
-    <section className="sticky -top-5 z-10 mb-4 flex flex-wrap items-center justify-center rounded bg-base-950 p-2 pt-4">
+    <section className="sticky -top-5 z-10 mb-4 flex flex-wrap items-center justify-center rounded bg-base-950 p-1 pt-4">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("bold")
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -39,7 +39,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("italic")
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -60,7 +60,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         disabled={!editor.can().chain().focus().toggleStrike().run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("strike")
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -81,7 +81,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       <button
         onClick={() => editor.chain().focus().toggleCode().run()}
         disabled={!editor.can().chain().focus().toggleCode().run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("code")
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -100,13 +100,13 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         </svg>
       </button>
       {/* <button
-        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-2 text-white"
+        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-1 text-white"
         onClick={() => editor.chain().focus().unsetAllMarks().run()}
       >
         clear marks
       </button> */}
       <button
-        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-2 text-white"
+        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-1 text-white"
         onClick={() => editor.chain().focus().clearNodes().run()}
       >
         <svg
@@ -123,7 +123,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("paragraph")
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -143,7 +143,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("heading", { level: 1 })
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -163,7 +163,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("heading", { level: 2 })
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -183,7 +183,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("heading", { level: 3 })
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -203,7 +203,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("heading", { level: 4 })
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -223,7 +223,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("heading", { level: 5 })
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -243,7 +243,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("heading", { level: 6 })
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -263,7 +263,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("bulletList")
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -283,7 +283,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("orderedList")
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -303,7 +303,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("codeBlock")
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -323,7 +323,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
-        className={`mb-1 mr-1 rounded border-2 p-2 ${
+        className={`mb-1 mr-1 rounded border-2 p-1 ${
           editor.isActive("blockquote")
             ? "border-primary-500 bg-primary-500 text-white"
             : "border-base-100 bg-base-950 text-white"
@@ -342,7 +342,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         </svg>
       </button>
       <button
-        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-2 text-white"
+        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-1 text-white"
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
       >
         <svg
@@ -355,13 +355,13 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         </svg>
       </button>
       {/* <button
-        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-2 text-white"
+        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-1 text-white"
         onClick={() => editor.chain().focus().setHardBreak().run()}
       >
         hard break
       </button> */}
       <button
-        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-2 text-white"
+        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-1 text-white"
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().chain().focus().undo().run()}
       >
@@ -378,7 +378,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         </svg>
       </button>
       <button
-        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-2 text-white"
+        className="mb-1 mr-1 rounded border-2 border-base-100 bg-base-950 p-1 text-white"
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().chain().focus().redo().run()}
       >
