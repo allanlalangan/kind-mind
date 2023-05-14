@@ -11,7 +11,7 @@ export default function GitHubSignInButton() {
       }
       onClick={() => {
         void signIn("github", {
-          callbackUrl: "http://localhost:3000/dashboard",
+          callbackUrl: "/dashboard",
         });
         setIsLoading(true);
       }}
