@@ -10,11 +10,9 @@ const JournalEntryForm = dynamic(
 
 const JournalPage: NextPageWithLayout = () => {
   return (
-    <>
-      <section className="grid grid-cols-12 gap-4">
-        <JournalEntryForm />
-      </section>
-    </>
+    <section className="-m-4 grid grid-cols-12 gap-4">
+      <JournalEntryForm />
+    </section>
   );
 };
 
