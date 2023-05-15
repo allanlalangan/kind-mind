@@ -6,11 +6,11 @@ import { signOut, useSession } from "next-auth/react";
 export default function UserOptionsDropdown() {
   const session = useSession();
   return (
-    <div className="top-16 z-20 ml-2 flex w-fit items-center rounded bg-base-100/40 px-2 text-right shadow-md">
+    <div className="top-16 z-20 ml-2 flex w-16 items-center justify-center rounded bg-base-100/40 text-right shadow-md">
       <Menu as="div" className="relative flex flex-col items-end text-left">
-        <Menu.Button className="flex w-fit justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+        <Menu.Button className="flex w-full justify-center rounded-full shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 active:scale-95 active:shadow-none">
           <Image
-            className="h-8 w-8 rounded-full"
+            className="h-10 w-10 rounded-full"
             alt={`${session?.data?.user?.name || "user"}'s avatar`}
             src={session?.data?.user?.image || ""}
             width={100}
