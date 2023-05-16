@@ -1,23 +1,27 @@
-// import JournalEntryForm from "~/components/JournalEntryForm";
+// import TipTapEditor from "~/components/TipTapEditor";
 import dynamic from "next/dynamic";
-import DashboardLayout from "~/components/DashboardLayout";
+import JournalLayout from "~/components/JournalLayout";
 import { type NextPageWithLayout } from "../_app";
+import DashboardLayout from "~/components/DashboardLayout";
 
-const JournalEntryForm = dynamic(
-  () => import("~/components/JournalEntryForm"),
-  { ssr: false }
-);
+const TipTapEditor = dynamic(() => import("~/components/TipTapEditor"), {
+  ssr: false,
+});
 
 const JournalPage: NextPageWithLayout = () => {
   return (
-    <section className="-m-4 grid grid-cols-12 gap-4">
-      <JournalEntryForm />
-    </section>
+    <>
+      <TipTapEditor />
+    </>
   );
 };
 
 JournalPage.getLayout = function getLayout(page) {
-  return <DashboardLayout>{page}</DashboardLayout>;
+  return (
+    <DashboardLayout>
+      <JournalLayout>{page}</JournalLayout>
+    </DashboardLayout>
+  );
 };
 
 export default JournalPage;
