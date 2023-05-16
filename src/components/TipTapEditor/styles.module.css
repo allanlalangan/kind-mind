@@ -1,6 +1,3 @@
-.ProseMirror > div {
-  padding: 1rem;
-}
 .ProseMirror > * + * {
   margin-top: 0.75em;
 }
