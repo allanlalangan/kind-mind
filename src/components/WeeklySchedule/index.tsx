@@ -1,4 +1,5 @@
-import { eachDayOfInterval, format, isToday } from "date-fns";
+import { add, eachDayOfInterval, format, isToday, set } from "date-fns";
+import { useState } from "react";
 
 function classNames(...classes: (false | string | undefined)[]) {
   return classes.filter(Boolean).join(" ");
@@ -17,14 +18,98 @@ export default function WeeklySchedule() {
     end: lastDayOfWeek,
   });
 
-  console.log(daysOfCurrentWeek);
+  const [selectedWeek, setSelectedWeek] = useState(daysOfCurrentWeek);
+
+  const previousWeek = () => {
+    const firstDayPreviousWeek = add(selectedWeek[0] || today, { weeks: -1 });
+    const lastDayPreviousWeek = add(selectedWeek[6] || today, { weeks: -1 });
+
+    setSelectedWeek(
+      eachDayOfInterval({
+        start: firstDayPreviousWeek,
+        end: lastDayPreviousWeek,
+      })
+    );
+  };
+
+  const nextWeek = () => {
+    const firstDayNextWeek = add(selectedWeek[0] || today, { weeks: 1 });
+    const lastDayNextWeek = add(selectedWeek[6] || today, { weeks: 1 });
+
+    setSelectedWeek(
+      eachDayOfInterval({
+        start: firstDayNextWeek,
+        end: lastDayNextWeek,
+      })
+    );
+  };
+
+  const goToCurrentWeek = () => {
+    setSelectedWeek(daysOfCurrentWeek);
+  };
+
   return (
     <section className="w-full rounded bg-base-100/40 p-2 shadow sm:p-4 md:w-1/2 lg:w-full xl:w-1/2">
       <h2 className="mb-4 text-2xl font-semibold text-primary-500">
         This Week At a Glance
       </h2>
+      <div className="mb-2 flex items-center justify-between">
+        <div className="grid grid-cols-2 gap-1">
+          <button
+            onClick={previousWeek}
+            type="button"
+            className="col-span-1 rounded border border-primary-500 p-2"
+          >
+            <span className="sr-only">Previous month</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={"1rem"}
+              height={"1rem"}
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              ></path>
+            </svg>
+          </button>
+          <button
+            onClick={nextWeek}
+            type="button"
+            className="col-span-1 rounded border border-primary-500 p-2"
+          >
+            <span className="sr-only">Next month</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={"1rem"}
+              height={"1rem"}
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="m8.25 4.5l7.5 7.5l-7.5 7.5"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <button
+          onClick={goToCurrentWeek}
+          type="button"
+          className="rounded border border-primary-500 p-2 "
+        >
+          <span className="">Go to current week</span>
+        </button>
+      </div>
       <div className="grid grid-cols-7 gap-2 rounded">
-        {daysOfCurrentWeek.map((day, i) => {
+        {selectedWeek.map((day, i) => {
           return (
             <button
               className={classNames(
