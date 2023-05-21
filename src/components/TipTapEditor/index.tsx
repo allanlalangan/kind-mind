@@ -70,7 +70,18 @@ export default function TipTapEditor() {
             Publish
           </button>
         </div>
-        <TipTapMenuBar editor={editor} />
+        <div className="">
+          <input
+            onChange={(e) => setTitleInputValue(e.target.value)}
+            value={titleInputValue}
+            className="w-full rounded-t bg-transparent p-4 text-4xl font-semibold text-primary-500 placeholder:font-semibold placeholder:text-primary-500/75"
+            placeholder="Entry Title..."
+            type="text"
+            name="title"
+            id="title"
+          />
+          <TipTapMenuBar editor={editor} />
+        </div>
       </section>
       <EditorContent className={styles.ProseMirror} editor={editor} />
     </form>
