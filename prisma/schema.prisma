@@ -98,8 +98,8 @@ model JournalEntry {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    title     String
-    content   String
+    title     String   @db.VarChar(255)
+    content   String   @db.LongText
     userId    String
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
