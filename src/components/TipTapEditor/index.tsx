@@ -1,8 +1,10 @@
+import { api } from "~/utils/api";
 import TipTapMenuBar from "../TipTapMenuBar";
 
 import styles from "./styles.module.css";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { useState } from "react";
 
 export default function TipTapEditor() {
   const editor = useEditor({
@@ -56,6 +58,21 @@ export default function TipTapEditor() {
     `,
   });
 
+  const [titleInputValue, setTitleInputValue] = useState("");
+  const createNewEntry = api.entries.createEntry.useMutation({
+    onSuccess: () => {
+      void console.log("createEntry success");
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    createNewEntry.mutate({
+      title: titleInputValue,
+      content: editor?.options.content as string,
+    });
+  };
+
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
@@ -63,11 +80,17 @@ export default function TipTapEditor() {
     >
       <section className="sticky -top-5 right-0 z-10 rounded rounded-b bg-base-900 pb-2 shadow-md md:pt-2">
         <div className="absolute right-2 top-2 grid grid-cols-2 gap-1">
-          <button className="col-span-1 rounded border border-accent-200 bg-base-400/20 p-2 text-accent-200 transition hover:bg-base-400/30 active:bg-base-400/40">
+          <button
+            type="button"
+            className="col-span-1 rounded border border-accent-200 bg-base-400/20 p-2 text-accent-200 transition hover:bg-base-400/30 active:bg-base-400/40"
+          >
             Save Draft
           </button>
-          <button className="col-span-1 rounded bg-accent-200 p-2 text-primary-800 transition hover:bg-accent-300 active:bg-accent-400">
-            Publish
+          <button
+            type="submit"
+            className="col-span-1 rounded bg-accent-200 p-2 text-primary-800 transition hover:bg-accent-300 active:bg-accent-400"
+          >
+            Submit Entry
           </button>
         </div>
         <div className="">
