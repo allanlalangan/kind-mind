@@ -6,7 +6,19 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useState } from "react";
 
-export default function TipTapEditor() {
+type TipTapEditorProps = {
+  content?: string;
+  isEditable?: boolean;
+  titleInputValue?: string;
+  setTitleInputValue: (value: string) => void;
+};
+
+export default function TipTapEditor({
+  content,
+  isEditable,
+  titleInputValue,
+  setTitleInputValue,
+}: TipTapEditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
