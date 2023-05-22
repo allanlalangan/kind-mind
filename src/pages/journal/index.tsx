@@ -3,14 +3,20 @@ import { type NextPageWithLayout } from "../_app";
 import DashboardLayout from "~/components/DashboardLayout";
 import Link from "next/link";
 import { api } from "~/utils/api";
+import LoadingSpinner from "~/components/LoadingSpinner";
 
 const JournalPage: NextPageWithLayout = () => {
-  const { data: entries, refetch: refetchEntries } =
-    api.entries.getAll.useQuery(undefined, {
-      onSuccess: (data) => {
-        console.log("getAll success", data);
-      },
-    });
+  const {
+    data: entries,
+    isLoading,
+    refetch: refetchEntries,
+  } = api.entries.getAll.useQuery(undefined, {
+    // data is considered stale after 30 seconds
+    staleTime: 1000 * 30,
+    onSuccess: (data) => {
+      console.log("getAll success", data);
+    },
+  });
 
   return (
     <>
@@ -18,6 +24,12 @@ const JournalPage: NextPageWithLayout = () => {
         <h2 className="col-span-12 mb-1 text-2xl font-medium">
           Recent Entries
         </h2>
+        {isLoading ? (
+          <span className="flex h-full w-full flex-col items-center justify-center text-primary-500">
+            <LoadingSpinner />
+            <p>Fetching entries...</p>
+          </span>
+        ) : null}
         {entries?.map((entry) => (
           <Link
             href={`/journal/entry/${entry.id}`}
