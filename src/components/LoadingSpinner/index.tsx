@@ -1,9 +1,9 @@
-export default function LoadingSpinner() {
+export default function LoadingSpinner({ size }: { size?: number }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
+      width={size ?? "32"}
+      height={size ?? "32"}
       viewBox="0 0 24 24"
     >
       <g stroke="currentColor">

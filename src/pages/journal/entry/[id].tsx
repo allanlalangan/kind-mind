@@ -1,7 +1,10 @@
+import { useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import DashboardLayout from "~/components/DashboardLayout";
+import DialogModal from "~/components/DialogModal";
 import LoadingSpinner from "~/components/LoadingSpinner";
 import TipTapEditor from "~/components/TipTapEditor";
 import { type NextPageWithLayout } from "~/pages/_app";
@@ -9,17 +12,53 @@ import { api } from "~/utils/api";
 
 const JournalEntryPage: NextPageWithLayout = () => {
   const [isEditable, setIsEditable] = useState(false);
-  const [content, setContent] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [titleInputValue, setTitleInputValue] = useState("");
+  const [content, setContent] = useState<string | null>(null);
+  const [tempContent, setTempContent] = useState(content);
   const router = useRouter();
   const { id } = router.query;
-  const { data: journalEntry, isLoading } = api.entries.getEntry.useQuery(
+
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        bulletList: {
+          keepMarks: true,
+          keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+        },
+        orderedList: {
+          keepMarks: true,
+          keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+        },
+      }),
+    ],
+    editorProps: {
+      attributes: {
+        class:
+          "-mx-4 prose bg-base-100/40 dark:prose-invert prose-sm sm:prose-base lg:prose-lg xl:prose-2xl p-4 pt-6 focus:outline-none",
+      },
+    },
+    content: content,
+    editable: isEditable,
+    onUpdate: ({ editor }) => {
+      setTempContent?.(editor.getHTML());
+    },
+  });
+
+  const {
+    data: journalEntry,
+    isLoading,
+    refetch,
+  } = api.entries.getEntry.useQuery(
     { id: id as string },
     {
+      refetchOnWindowFocus: false,
       onSuccess: (data) => {
         console.log("getEntry success");
         if (!!data) {
+          editor?.commands.setContent(data.content);
           setContent(data.content);
+          setTempContent(data.content);
           setTitleInputValue(data.title);
         }
       },
@@ -44,7 +83,7 @@ const JournalEntryPage: NextPageWithLayout = () => {
           <LoadingSpinner />
         </span>
       ) : (
-        <article className="col-span-8 mb-2 flex flex-col rounded">
+        <>
           {!journalEntry ? (
             <span>Entry Not found</span>
           ) : (
@@ -58,7 +97,15 @@ const JournalEntryPage: NextPageWithLayout = () => {
                 )}
 
                 <button
-                  onClick={() => setIsEditable(!isEditable)}
+                  onClick={() => {
+                    if (!isEditable) {
+                      // setModalIsOpen(true);
+
+                      setIsEditable(true);
+                    } else {
+                      setModalIsOpen(true);
+                    }
+                  }}
                   type="button"
                   className="absolute -top-8 right-0 z-20 h-8 w-8 rounded border border-secondary-500 bg-base-100/40 p-1 transition hover:bg-secondary-500/50"
                 >
@@ -89,18 +136,70 @@ const JournalEntryPage: NextPageWithLayout = () => {
                   )}
                 </button>
               </div>
-              {content && (
+              {!!content && (
                 <TipTapEditor
+                  editor={editor}
+                  refetchEntry={() => void refetch()}
+                  modalIsOpen={modalIsOpen}
+                  setModalIsOpen={setModalIsOpen}
                   titleInputValue={titleInputValue}
                   setTitleInputValue={setTitleInputValue}
                   content={content}
+                  // tempContent={tempContent}
+                  setTempContent={setTempContent}
                   isEditable={isEditable}
+                  setIsEditable={setIsEditable}
                 />
               )}
             </>
           )}
-        </article>
+        </>
       )}
+      <DialogModal
+        isOpen={modalIsOpen}
+        handleClose={() => {
+          setModalIsOpen(false);
+        }}
+      >
+        <h3 className="p-4 text-base font-semibold leading-6 text-gray-900">
+          Are you sure?
+        </h3>
+        <p className="p-8 text-sm text-gray-500">
+          All unsaved changes will be lost
+        </p>
+        <div className="w-full bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button
+            type="button"
+            className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-1/3"
+            onClick={() => {
+              editor?.commands.setContent(content);
+              setModalIsOpen(false);
+              !!setIsEditable && setIsEditable(false);
+            }}
+          >
+            Discard Changes
+          </button>
+          <button
+            className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:ml-3 sm:mt-0 sm:w-1/3"
+            onClick={() => {
+              console.log(tempContent);
+              void refetch();
+              editor?.commands.setContent(content);
+              setModalIsOpen(false);
+              !!setIsEditable && setIsEditable(false);
+            }}
+          >
+            Save Changes
+          </button>
+          <button
+            type="button"
+            className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-1/3"
+            onClick={() => setModalIsOpen(false)}
+          >
+            Continue Editing
+          </button>
+        </div>
+      </DialogModal>
     </>
   );
 };
