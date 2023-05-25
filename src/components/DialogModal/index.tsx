@@ -4,8 +4,7 @@ type DialogModalProps = {
   children: React.ReactNode;
   isOpen: boolean;
   handleClose: () => void;
-  requireConfirmationOnRouteChange: boolean;
-  wrapperId: string;
+  requireConfirmationOnRouteChange?: boolean;
 };
 
 export default function DialogModal({

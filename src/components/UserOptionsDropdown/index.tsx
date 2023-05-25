@@ -72,7 +72,6 @@ export default function UserOptionsDropdown() {
         isOpen={modalIsOpen}
         handleClose={() => setModalIsOpen(false)}
         requireConfirmationOnRouteChange={false}
-        wrapperId="modal-container"
       >
         <h3 className="p-4 text-base font-semibold leading-6 text-gray-900">
           Logout
