@@ -65,6 +65,24 @@ const JournalEntryPage: NextPageWithLayout = () => {
     }
   );
 
+  const updateEntry = api.entries.updateEntry.useMutation({
+    onSuccess: (data) => {
+      console.log(data);
+      void refetch();
+      console.log("updateEntry success");
+    },
+  });
+
+  const handleSave = () => {
+    setModalIsOpen(false);
+    updateEntry.mutate({
+      id: id as string,
+      title: titleInputValue || "untitled",
+      content: tempContent || "",
+    });
+    setIsEditable(false);
+  };
+
   return (
     <>
       <section>
@@ -181,13 +199,7 @@ const JournalEntryPage: NextPageWithLayout = () => {
           </button>
           <button
             className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:ml-3 sm:mt-0 sm:w-1/3"
-            onClick={() => {
-              console.log(tempContent);
-              void refetch();
-              editor?.commands.setContent(content);
-              setModalIsOpen(false);
-              !!setIsEditable && setIsEditable(false);
-            }}
+            onClick={handleSave}
           >
             Save Changes
           </button>
