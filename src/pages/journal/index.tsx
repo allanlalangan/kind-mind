@@ -4,6 +4,7 @@ import DashboardLayout from "~/components/DashboardLayout";
 import Link from "next/link";
 import { api } from "~/utils/api";
 import LoadingSpinner from "~/components/LoadingSpinner";
+import EntryActionsDropdownMenu from "~/components/EntryActionsDropdown";
 
 const JournalPage: NextPageWithLayout = () => {
   const {
@@ -30,16 +31,22 @@ const JournalPage: NextPageWithLayout = () => {
             <p>Fetching entries...</p>
           </span>
         ) : null}
-        {entries?.map((entry) => (
-          <Link
-            href={`/journal/entry/${entry.id}`}
-            className="rounded border border-primary-500 p-2"
-            key={entry.id}
-          >
-            <h3 className="text-2xl text-primary-500">{entry.title}</h3>
-            <p>{entry.createdAt.toLocaleString()}</p>
-          </Link>
-        ))}
+        <ul>
+          {entries?.map((entry) => (
+            <li
+              className="flex h-full items-center justify-between rounded border border-primary-500 p-2"
+              key={entry.id}
+            >
+              <Link href={`/journal/entry/${entry.id}`} className="flex-1">
+                <article>
+                  <h3 className="text-2xl text-primary-500">{entry.title}</h3>
+                  <p>{entry.createdAt.toLocaleString()}</p>
+                </article>
+              </Link>
+              <EntryActionsDropdownMenu />
+            </li>
+          ))}
+        </ul>
       </section>
       <Link
         className="col-span-12 row-start-1 flex items-center rounded bg-primary-500 p-4 text-white shadow transition hover:bg-primary-600 hover:shadow-lg hover:shadow-primary-400/50 active:bg-primary-700 md:col-span-6 md:row-auto"
