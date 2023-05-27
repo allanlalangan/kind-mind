@@ -2,7 +2,7 @@ import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardLayout from "~/components/DashboardLayout";
 import DialogModal from "~/components/DialogModal";
 import LoadingSpinner from "~/components/LoadingSpinner";
@@ -11,13 +11,24 @@ import { type NextPageWithLayout } from "~/pages/_app";
 import { api } from "~/utils/api";
 
 const JournalEntryPage: NextPageWithLayout = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
   const [isEditable, setIsEditable] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  // check to see if directed to edit mode route then set isEditable state
+  useEffect(() => {
+    if (router.query.edit !== undefined) {
+      setIsEditable(true);
+    } else {
+      setIsEditable(false);
+    }
+  }, [router.query]);
+
   const [titleInputValue, setTitleInputValue] = useState("");
   const [content, setContent] = useState<string | null>(null);
   const [tempContent, setTempContent] = useState(content);
-  const router = useRouter();
-  const { id } = router.query;
 
   const editor = useEditor({
     extensions: [
@@ -117,8 +128,6 @@ const JournalEntryPage: NextPageWithLayout = () => {
                 <button
                   onClick={() => {
                     if (!isEditable) {
-                      // setModalIsOpen(true);
-
                       setIsEditable(true);
                     } else {
                       setModalIsOpen(true);

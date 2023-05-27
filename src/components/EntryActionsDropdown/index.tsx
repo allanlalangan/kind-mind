@@ -1,8 +1,15 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import DialogModal from "../DialogModal";
+import Link from "next/link";
 
-export default function EntryActionsDropdownMenu() {
+type EntryActionsDropdownMenuProps = {
+  id: string;
+};
+
+export default function EntryActionsDropdownMenu({
+  id,
+}: EntryActionsDropdownMenuProps) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
@@ -37,15 +44,16 @@ export default function EntryActionsDropdownMenu() {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
-                  <button
+                  <Link
+                    href={`/journal/entry/${id}?edit`}
                     className={`${
                       active
                         ? "bg-base-100/50 text-primary-500"
                         : "text-base-900"
-                    } group flex w-full items-center rounded px-2 py-2 text-sm transition`}
+                    } group flex w-full items-center rounded px-2 py-2 text-sm normal-case transition`}
                   >
                     Edit
-                  </button>
+                  </Link>
                 )}
               </Menu.Item>
             </div>
