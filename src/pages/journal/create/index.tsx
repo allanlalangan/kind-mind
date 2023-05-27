@@ -64,13 +64,6 @@ const CreateJournalEntryPage: NextPageWithLayout = () => {
 
   const { mutate } = createEntry;
 
-  // const createEntry = api.entries.createEntry.useMutation({
-  //   onSuccess: (data) => {
-  //     console.log("createEntry success");
-  //     void router.push("/journal");
-  //   },
-  // });
-
   const onSubmit = () => {
     if (editor?.isEmpty) {
       console.log("Editor is empty, please add some content");

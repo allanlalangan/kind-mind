@@ -112,13 +112,6 @@ const JournalEntryPage: NextPageWithLayout = () => {
   }
   const { data: journalEntry, isLoading, refetch } = getEntryQuery;
   const { mutate } = updateEntry;
-  // const updateEntry = api.entries.updateEntry.useMutation({
-  //   onSuccess: (data) => {
-  //     console.log(data);
-  //     void refetch();
-  //     console.log("updateEntry success");
-  //   },
-  // });
 
   const handleSave = () => {
     setModalIsOpen(false);
@@ -132,7 +125,7 @@ const JournalEntryPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <section>
+      <section className="w-3/4 truncate">
         <Link
           className="pr-1 underline-offset-2 hover:underline"
           href="/journal"
