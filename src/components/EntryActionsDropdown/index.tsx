@@ -1,9 +1,33 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import DialogModal from "../DialogModal";
+import Link from "next/link";
+import { api } from "~/utils/api";
 
-export default function EntryActionsDropdownMenu() {
+type EntryActionsDropdownMenuProps = {
+  id: string;
+  refetchEntries: () => void;
+};
+
+export default function EntryActionsDropdownMenu({
+  id,
+  refetchEntries,
+}: EntryActionsDropdownMenuProps) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const deleteEntry = api.entries.deleteEntry.useMutation({
+    onSuccess: () => {
+      console.log(`delete entry ${id} success}`);
+      refetchEntries();
+    },
+  });
+
+  const onDelete = () => {
+    deleteEntry.mutate({
+      id,
+    });
+    setModalIsOpen(false);
+  };
 
   return (
     <>
@@ -37,15 +61,16 @@ export default function EntryActionsDropdownMenu() {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
-                  <button
+                  <Link
+                    href={`/journal/entry/${id}?edit`}
                     className={`${
                       active
                         ? "bg-base-100/50 text-primary-500"
                         : "text-base-900"
-                    } group flex w-full items-center rounded px-2 py-2 text-sm transition`}
+                    } group flex w-full items-center rounded px-2 py-2 text-sm normal-case transition`}
                   >
                     Edit
-                  </button>
+                  </Link>
                 )}
               </Menu.Item>
             </div>
@@ -84,7 +109,7 @@ export default function EntryActionsDropdownMenu() {
           <button
             type="button"
             className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-1/4"
-            onClick={() => setModalIsOpen(false)}
+            onClick={onDelete}
           >
             Delete
           </button>

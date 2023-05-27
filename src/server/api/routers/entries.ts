@@ -11,6 +11,7 @@ export const entriesRouter = createTRPCRouter({
         title: true,
         createdAt: true,
       },
+      orderBy: { createdAt: "desc" },
     });
   }),
 
@@ -41,6 +42,14 @@ export const entriesRouter = createTRPCRouter({
           title: input.title,
           content: input.content,
         },
+      });
+    }),
+
+  deleteEntry: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.journalEntry.delete({
+        where: { id: input.id },
       });
     }),
 });
