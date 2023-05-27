@@ -5,17 +5,28 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 import LoadingSpinner from "~/components/LoadingSpinner";
 import EntryActionsDropdownMenu from "~/components/EntryActionsDropdown";
+import { useSession } from "next-auth/react";
 
 const JournalPage: NextPageWithLayout = () => {
-  const {
-    data: entries,
-    isLoading,
-    refetch: refetchEntries,
-  } = api.entries.getAll.useQuery(undefined, {
-    onSuccess: (data) => {
-      console.log("getAll success", data);
-    },
-  });
+  const session = useSession();
+
+  let getAllQuery;
+
+  if (!session.data?.user) {
+    getAllQuery = api.guestEntries.getAll.useQuery(undefined, {
+      onSuccess: (data) => {
+        console.log("public getAll success", data);
+      },
+    });
+  } else {
+    getAllQuery = api.entries.getAll.useQuery(undefined, {
+      onSuccess: (data) => {
+        console.log("getAll success", data);
+      },
+    });
+  }
+
+  const { data: entries, isLoading, refetch: refetchEntries } = getAllQuery;
 
   return (
     <>

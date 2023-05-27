@@ -3,6 +3,7 @@ import { Fragment, useState } from "react";
 import DialogModal from "../DialogModal";
 import Link from "next/link";
 import { api } from "~/utils/api";
+import { useSession } from "next-auth/react";
 
 type EntryActionsDropdownMenuProps = {
   id: string;
@@ -13,17 +14,38 @@ export default function EntryActionsDropdownMenu({
   id,
   refetchEntries,
 }: EntryActionsDropdownMenuProps) {
+  const session = useSession();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const deleteEntry = api.entries.deleteEntry.useMutation({
-    onSuccess: () => {
-      console.log(`delete entry ${id} success}`);
-      refetchEntries();
-    },
-  });
+  let deleteEntry;
+
+  if (!session.data?.user) {
+    deleteEntry = api.guestEntries.deleteEntry.useMutation({
+      onSuccess: () => {
+        console.log(`public delete entry ${id} success}`);
+        refetchEntries();
+      },
+    });
+  } else {
+    deleteEntry = api.entries.deleteEntry.useMutation({
+      onSuccess: () => {
+        console.log(`delete entry ${id} success}`);
+        refetchEntries();
+      },
+    });
+  }
+
+  const { mutate } = deleteEntry;
+
+  // const deleteEntry = api.entries.deleteEntry.useMutation({
+  //   onSuccess: () => {
+  //     console.log(`delete entry ${id} success}`);
+  //     refetchEntries();
+  //   },
+  // });
 
   const onDelete = () => {
-    deleteEntry.mutate({
+    mutate({
       id,
     });
     setModalIsOpen(false);
