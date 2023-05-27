@@ -9,13 +9,13 @@ export default function EntryActionsDropdownMenu() {
     <>
       <Menu
         as="div"
-        className="bg-accent-40 relative flex h-8 w-8 flex-col items-end rounded-full border border-primary-500 p-1 text-left font-medium uppercase tracking-wide text-primary-500 transition"
+        className="bg-accent-40 relative flex flex-col items-end rounded-full border border-primary-500 p-1 text-left font-medium uppercase tracking-wide text-primary-500 transition"
       >
-        <Menu.Button className="flex w-full justify-center rounded-full text-primary-500 shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 active:scale-95 active:shadow-none">
+        <Menu.Button className="flex h-6 w-6 justify-center rounded-full text-primary-500 shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 active:scale-95 active:shadow-none">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            // width="32"
-            // height="32"
+            width="24"
+            height="24"
             viewBox="0 0 20 20"
           >
             <path
