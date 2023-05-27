@@ -12,8 +12,6 @@ const JournalPage: NextPageWithLayout = () => {
     isLoading,
     refetch: refetchEntries,
   } = api.entries.getAll.useQuery(undefined, {
-    // data is considered stale after 30 seconds
-    staleTime: 1000 * 30,
     onSuccess: (data) => {
       console.log("getAll success", data);
     },
@@ -21,20 +19,18 @@ const JournalPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <section className="col-span-12 flex flex-col rounded bg-base-100/40 p-4 shadow md:col-span-6">
-        <h2 className="col-span-12 mb-1 text-2xl font-medium">
-          Recent Entries
-        </h2>
+      <section className="col-span-12 flex flex-col rounded bg-base-100/40 p-4 shadow md:col-span-6 md:row-span-2">
+        <h2 className="mb-1 text-2xl font-medium">Recent Entries</h2>
         {isLoading ? (
           <span className="flex h-full w-full flex-col items-center justify-center text-primary-500">
             <LoadingSpinner />
             <p>Fetching entries...</p>
           </span>
         ) : null}
-        <ul>
+        <ul className="flex flex-col gap-2">
           {entries?.map((entry) => (
             <li
-              className="flex h-full items-center justify-between rounded border border-primary-500 p-2"
+              className="flex h-32 items-center justify-between rounded border border-primary-500 p-2"
               key={entry.id}
             >
               <Link href={`/journal/entry/${entry.id}`} className="flex-1">
@@ -43,7 +39,10 @@ const JournalPage: NextPageWithLayout = () => {
                   <p>{entry.createdAt.toLocaleString()}</p>
                 </article>
               </Link>
-              <EntryActionsDropdownMenu />
+              <EntryActionsDropdownMenu
+                refetchEntries={() => void refetchEntries()}
+                id={entry.id}
+              />
             </li>
           ))}
         </ul>

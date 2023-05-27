@@ -28,21 +28,6 @@ export default function TipTapEditor({
   useEffect(() => {
     editor?.setEditable(Boolean(isEditable));
   }, [editor, isEditable]);
-
-  const createNewEntry = api.entries.createEntry.useMutation({
-    onSuccess: () => {
-      void console.log("createEntry success");
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // createNewEntry.mutate({
-    //   title: titleInputValue || "Untitled",
-    //   content: editor?.getHTML() as string,
-    // });
-  };
-
   return (
     <>
       {isEditable && (
@@ -51,7 +36,7 @@ export default function TipTapEditor({
             <input
               onChange={(e) => setTitleInputValue(e.target.value)}
               value={titleInputValue}
-              className="w-full rounded-t bg-transparent p-4 text-4xl font-semibold text-primary-500 placeholder:font-semibold placeholder:text-primary-500/75"
+              className="w-full rounded-t bg-transparent p-4 text-4xl font-semibold text-primary-500 outline-none placeholder:font-semibold placeholder:text-primary-500/50"
               placeholder="Entry Title..."
               type="text"
               name="title"
