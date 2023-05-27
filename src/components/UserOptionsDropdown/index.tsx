@@ -90,7 +90,7 @@ export default function UserOptionsDropdown() {
             }}
             ref={cancelLogoutButton}
           >
-            {isLoggingOut ? <LoadingSpinner size={8} /> : <>Logout</>}
+            {isLoggingOut ? <LoadingSpinner size={20} /> : <>Logout</>}
           </button>
           <button
             disabled={isLoggingOut}

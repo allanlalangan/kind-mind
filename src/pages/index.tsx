@@ -31,12 +31,14 @@ const Home: NextPage = () => {
         >
           Login
         </Link>
-        <Link
-          href="/dashboard"
-          className="px-2 font-medium underline underline-offset-2 transition hover:text-primary-800"
-        >
-          Continue as guest
-        </Link>
+        {!session?.data?.user && (
+          <Link
+            href="/dashboard"
+            className="px-2 font-medium underline underline-offset-2 transition hover:text-primary-800"
+          >
+            Continue as guest
+          </Link>
+        )}
       </main>
     </>
   );
