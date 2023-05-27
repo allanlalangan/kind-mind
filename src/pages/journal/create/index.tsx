@@ -1,6 +1,6 @@
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { router } from "@trpc/server";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -11,6 +11,7 @@ import { type NextPageWithLayout } from "~/pages/_app";
 import { api } from "~/utils/api";
 
 const CreateJournalEntryPage: NextPageWithLayout = () => {
+  const session = useSession();
   const router = useRouter();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -43,12 +44,32 @@ const CreateJournalEntryPage: NextPageWithLayout = () => {
     },
   });
 
-  const createEntry = api.entries.createEntry.useMutation({
-    onSuccess: (data) => {
-      console.log("createEntry success");
-      void router.push("/journal");
-    },
-  });
+  let createEntry;
+
+  if (!session.data?.user) {
+    createEntry = api.guestEntries.createEntry.useMutation({
+      onSuccess: (data) => {
+        console.log("createEntry success");
+        void router.push("/journal");
+      },
+    });
+  } else {
+    createEntry = api.entries.createEntry.useMutation({
+      onSuccess: (data) => {
+        console.log("createEntry success");
+        void router.push("/journal");
+      },
+    });
+  }
+
+  const { mutate } = createEntry;
+
+  // const createEntry = api.entries.createEntry.useMutation({
+  //   onSuccess: (data) => {
+  //     console.log("createEntry success");
+  //     void router.push("/journal");
+  //   },
+  // });
 
   const onSubmit = () => {
     if (editor?.isEmpty) {
@@ -56,7 +77,10 @@ const CreateJournalEntryPage: NextPageWithLayout = () => {
     } else {
       console.log(tempContent);
       console.log(titleInputValue);
-      createEntry.mutate({ content: tempContent, title: titleInputValue });
+      mutate({
+        content: tempContent,
+        title: titleInputValue.trim() === "" ? "untitled" : titleInputValue,
+      });
     }
   };
 

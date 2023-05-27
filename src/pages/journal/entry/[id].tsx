@@ -1,5 +1,6 @@
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -11,6 +12,7 @@ import { type NextPageWithLayout } from "~/pages/_app";
 import { api } from "~/utils/api";
 
 const JournalEntryPage: NextPageWithLayout = () => {
+  const session = useSession();
   const router = useRouter();
   const { id } = router.query;
 
@@ -56,37 +58,71 @@ const JournalEntryPage: NextPageWithLayout = () => {
     },
   });
 
-  const {
-    data: journalEntry,
-    isLoading,
-    refetch,
-  } = api.entries.getEntry.useQuery(
-    { id: id as string },
-    {
-      refetchOnWindowFocus: false,
-      onSuccess: (data) => {
-        console.log("getEntry success");
-        if (!!data) {
-          editor?.commands.setContent(data.content);
-          setContent(data.content);
-          setTempContent(data.content);
-          setTitleInputValue(data.title);
-        }
-      },
-    }
-  );
+  let getEntryQuery;
+  let updateEntry;
 
-  const updateEntry = api.entries.updateEntry.useMutation({
-    onSuccess: (data) => {
-      console.log(data);
-      void refetch();
-      console.log("updateEntry success");
-    },
-  });
+  if (!session.data?.user) {
+    getEntryQuery = api.guestEntries.getEntry.useQuery(
+      { id: id as string },
+      {
+        refetchOnWindowFocus: false,
+        onSuccess: (data) => {
+          console.log("public getEntry success");
+          if (!!data) {
+            editor?.commands.setContent(data.content);
+            setContent(data.content);
+            setTempContent(data.content);
+            setTitleInputValue(data.title);
+          }
+        },
+      }
+    );
+
+    updateEntry = api.guestEntries.updateEntry.useMutation({
+      onSuccess: (data) => {
+        console.log(data);
+        void refetch();
+        console.log("public updateEntry success");
+      },
+    });
+  } else {
+    getEntryQuery = api.entries.getEntry.useQuery(
+      { id: id as string },
+      {
+        refetchOnWindowFocus: false,
+        onSuccess: (data) => {
+          console.log("getEntry success");
+          if (!!data) {
+            editor?.commands.setContent(data.content);
+            setContent(data.content);
+            setTempContent(data.content);
+            setTitleInputValue(data.title);
+          }
+        },
+      }
+    );
+
+    updateEntry = api.entries.updateEntry.useMutation({
+      onSuccess: (data) => {
+        console.log(data);
+        void refetch();
+        console.log("updateEntry success");
+      },
+    });
+  }
+  const { data: journalEntry, isLoading, refetch } = getEntryQuery;
+  const { mutate } = updateEntry;
+  // const updateEntry = api.entries.updateEntry.useMutation({
+  //   onSuccess: (data) => {
+  //     console.log(data);
+  //     void refetch();
+  //     console.log("updateEntry success");
+  //   },
+  // });
 
   const handleSave = () => {
     setModalIsOpen(false);
-    updateEntry.mutate({
+    mutate({
       id: id as string,
       title: titleInputValue || "untitled",
       content: tempContent || "",
