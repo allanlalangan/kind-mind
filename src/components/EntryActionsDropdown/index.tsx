@@ -2,15 +2,32 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import DialogModal from "../DialogModal";
 import Link from "next/link";
+import { api } from "~/utils/api";
 
 type EntryActionsDropdownMenuProps = {
   id: string;
+  refetchEntries: () => void;
 };
 
 export default function EntryActionsDropdownMenu({
   id,
+  refetchEntries,
 }: EntryActionsDropdownMenuProps) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const deleteEntry = api.entries.deleteEntry.useMutation({
+    onSuccess: () => {
+      console.log(`delete entry ${id} success}`);
+      void refetchEntries();
+    },
+  });
+
+  const onDelete = () => {
+    deleteEntry.mutate({
+      id,
+    });
+    setModalIsOpen(false);
+  };
 
   return (
     <>
@@ -92,7 +109,7 @@ export default function EntryActionsDropdownMenu({
           <button
             type="button"
             className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-1/4"
-            onClick={() => setModalIsOpen(false)}
+            onClick={onDelete}
           >
             Delete
           </button>
