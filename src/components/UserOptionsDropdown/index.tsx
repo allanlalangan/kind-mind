@@ -12,7 +12,7 @@ export default function UserOptionsDropdown() {
   const cancelLogoutButton = useRef(null);
 
   return (
-    <div className="top-16 z-20 ml-2 flex w-16 items-center justify-center rounded bg-base-100/40 text-right shadow-md">
+    <div className="top-16 z-20 flex w-16 items-center justify-center rounded-r bg-base-100/40 text-right md:ml-2 md:rounded md:shadow-md">
       <Menu as="div" className="relative flex flex-col items-end text-left">
         <Menu.Button className="flex w-full justify-center rounded-full shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 active:scale-95 active:shadow-none">
           <Image

@@ -43,7 +43,7 @@ export default function DialogModal({
           {
             <Dialog.Panel
               as="section"
-              className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+              className="relative w-full transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
             >
               {children}
             </Dialog.Panel>

@@ -163,7 +163,7 @@ const JournalEntryPage: NextPageWithLayout = () => {
                     }
                   }}
                   type="button"
-                  className="absolute -top-8 right-0 z-20 h-8 w-8 rounded border border-secondary-500 bg-base-100/40 p-1 transition hover:bg-secondary-500/50"
+                  className="absolute -top-8 right-0 z-0 h-8 w-8 rounded border border-secondary-500 bg-base-100/40 p-1 transition hover:bg-secondary-500/50"
                 >
                   {!isEditable ? (
                     <svg
