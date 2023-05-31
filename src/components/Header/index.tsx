@@ -58,15 +58,15 @@ export default function Header({ navIsOpen, setNavIsOpen }: HeaderProps) {
             </svg>
           )}
         </button>
-        {!session?.data?.user && (
-          <Link
-            href="/login"
-            className="w-full px-2 text-right underline underline-offset-2 transition hover:text-primary-600"
-          >
-            Login
-          </Link>
-        )}
       </section>
+      {!session?.data?.user && (
+        <Link
+          href="/login"
+          className="ml-2 flex items-center justify-center rounded bg-base-100/40 px-2 text-right underline underline-offset-2 transition hover:text-primary-600"
+        >
+          Login
+        </Link>
+      )}
       {!!session?.data?.user && <UserOptionsDropdown />}
     </header>
   );
