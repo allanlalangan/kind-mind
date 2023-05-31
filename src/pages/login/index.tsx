@@ -9,7 +9,7 @@ export default function LoginPage() {
     router.push("/dashboard");
   }
   return (
-    <main className="h-full rounded bg-base-100/40">
+    <main className="m-auto flex h-full items-center justify-center rounded bg-base-100/40">
       <LoginForm />
     </main>
   );
