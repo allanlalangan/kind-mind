@@ -9,7 +9,7 @@ const Sidebar = ({ navIsOpen }: SidebarProps) => {
     <aside
       className={`${
         navIsOpen ? "" : "-translate-x-full"
-      } fixed bottom-0 left-0 top-0 z-10 flex w-1/3 flex-col items-center justify-start rounded-tr bg-base-100/40 p-2 pt-4 shadow-md backdrop-blur-md transition delay-75 ease-in md:bottom-2 md:left-2 md:top-16 md:h-auto md:w-36 md:-translate-x-0 md:rounded md:pt-2`}
+      } fixed bottom-0 left-0 top-0 z-10 flex w-1/2 flex-col items-center justify-start rounded-tr bg-base-100/40 p-2 pt-4 shadow-md backdrop-blur-md transition delay-75 ease-in md:bottom-2 md:left-2 md:top-16 md:h-auto md:w-36 md:-translate-x-0 md:rounded md:pt-2`}
     >
       <Link
         href="/"
