@@ -1,6 +1,5 @@
-import { add, eachDayOfInterval, format, isToday, set } from "date-fns";
+import { add, addDays, eachDayOfInterval, format, isToday } from "date-fns";
 import { useState } from "react";
-
 function classNames(...classes: (false | string | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -8,10 +7,10 @@ function classNames(...classes: (false | string | undefined)[]) {
 export default function WeeklySchedule() {
   const today = new Date(); // get current date
   const startDate = today.getDate() - today.getDay(); // First day is the day of the month - the day of the week
-  const endDate = startDate + 6; // last day is the first day + 6
+  // const endDate = addDays(startDate, 6); // last day is the first day + 6
 
   const firstDayOfWeek = new Date(today.setDate(startDate));
-  const lastDayOfWeek = new Date(today.setDate(endDate));
+  const lastDayOfWeek = addDays(firstDayOfWeek, 6);
 
   const daysOfCurrentWeek = eachDayOfInterval({
     start: firstDayOfWeek,
