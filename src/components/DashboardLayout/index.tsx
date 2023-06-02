@@ -13,7 +13,6 @@ export default function DashboardLayout({
 
   useEffect(() => {
     let lastScrollY = window.pageYOffset;
-    console.log(window);
 
     const updateScrollDirection = () => {
       const scrollY = window.pageYOffset;
