@@ -45,7 +45,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
             />
             <meta
               name="viewport"
-              content="initial-scale=1, viewport-fit=cover"
+              content="initial-scale=1, height=device-height, width=device-width, viewport-fit=cover"
             />
             <link rel="icon" href="/favicon.ico" />
           </Head>
