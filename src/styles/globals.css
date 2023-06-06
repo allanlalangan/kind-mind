@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    @apply bg-gradient-to-br from-primary-400 to-secondary-400;
+    @apply bg-gradient-to-br from-primary-400 to-secondary-400 safe-top safe-left safe-right safe-bottom;
   }
   #__next {
     margin: auto;
