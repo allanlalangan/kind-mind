@@ -5,6 +5,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply bg-gradient-to-br from-primary-400 to-secondary-400;
+  }
   #__next {
     margin: auto;
     width: 100%;
