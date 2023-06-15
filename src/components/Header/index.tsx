@@ -20,7 +20,7 @@ export default function Header({
   const session = useSession();
   return (
     <header
-      className={`sticky z-10 mb-2 flex rounded shadow-md transition-all md:fixed md:left-2 md:right-2 md:top-2 md:mb-0 md:bg-transparent md:shadow-none ${
+      className={`sticky z-[9] mb-2 flex rounded shadow-md transition-all md:fixed md:left-2 md:right-2 md:top-2 md:mb-0 md:bg-transparent md:shadow-none ${
         scrollDirection === "down" ? "-top-full" : ""
       } ${scrollDirection === "up" ? "top-0" : ""} ${
         isScrolledToTop ? "" : "bg-base-100"
