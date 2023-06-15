@@ -24,7 +24,7 @@ function classNames(...classes: (false | string | undefined)[]) {
 
 import type { Event as EventType } from "~/components/Event";
 
-type CalendarProps = {
+type MonthlyViewProps = {
   firstDayCurrentMonth: Date;
   days: Date[];
   events: EventType[];
@@ -34,7 +34,7 @@ type CalendarProps = {
   setSelectedDay: (date: Date) => void;
 };
 
-const Calendar = ({
+const MonthlyView = ({
   firstDayCurrentMonth,
   days,
   events,
@@ -42,7 +42,7 @@ const Calendar = ({
   nextMonth,
   selectedDay,
   setSelectedDay,
-}: CalendarProps) => {
+}: MonthlyViewProps) => {
   return (
     <figure className="col-span-12 row-span-2 flex flex-col rounded bg-base-100/40 p-2 shadow sm:p-4 lg:col-span-6">
       <div className="flex items-center rounded bg-base-100/40 p-4 shadow">
@@ -103,53 +103,57 @@ const Calendar = ({
         <div>F</div>
         <div>S</div>
       </div>
-      <div className="l mt-2 grid min-h-[50vh] grid-cols-7 rounded-b bg-base-100/40 text-sm">
+      <div className="mt-2 grid min-h-[50vh] grid-cols-7 gap-1 rounded-b bg-base-100/40 p-2 text-sm">
         {days.map((day, dayIdx) => (
           <div
             key={day.toString()}
             className={classNames(
-              dayIdx === 0 && colStartClasses[getDay(day)],
-              "h-full w-full py-1.5"
+              !isEqual(day, selectedDay) &&
+                isToday(day) &&
+                "text-secondary-500",
+              !isEqual(day, selectedDay) &&
+                !isToday(day) &&
+                isSameMonth(day, firstDayCurrentMonth) &&
+                "text-neutral-900",
+              !isEqual(day, selectedDay) &&
+                !isToday(day) &&
+                !isSameMonth(day, firstDayCurrentMonth) &&
+                "text-neutral-400",
+
+              isEqual(day, selectedDay) && !isToday(day) && "bg-primary-focus",
+              (isEqual(day, selectedDay) || isToday(day)) && "font-semibold",
+              "flex h-28 w-full flex-col items-center rounded border border-primary-300"
             )}
           >
             <button
               type="button"
               onClick={() => setSelectedDay(day)}
               className={classNames(
-                isEqual(day, selectedDay) && !isToday(day) && "bg-primary-300",
-                !isEqual(day, selectedDay) &&
-                  isToday(day) &&
-                  "text-secondary-500",
-                !isEqual(day, selectedDay) &&
-                  !isToday(day) &&
-                  isSameMonth(day, firstDayCurrentMonth) &&
-                  "text-neutral-900",
-                !isEqual(day, selectedDay) &&
-                  !isToday(day) &&
-                  !isSameMonth(day, firstDayCurrentMonth) &&
-                  "text-neutral-400",
+                dayIdx === 0 && colStartClasses[getDay(day)],
                 isEqual(day, selectedDay) &&
                   isToday(day) &&
-                  "bg-secondary-500 text-white",
+                  "border-secondary-500 bg-secondary-500 text-white",
                 isEqual(day, selectedDay) &&
                   !isToday(day) &&
-                  "bg-primary-focus",
-                !isEqual(day, selectedDay) && "hover:bg-primary-300/50",
-                (isEqual(day, selectedDay) || isToday(day)) && "font-semibold",
-                "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
+                  "border-primary-300 bg-primary-300",
+                !isEqual(day, selectedDay) &&
+                  "border-primary-300 hover:bg-primary-300/50",
+                "group flex w-full flex-col items-center justify-center rounded-t-sm border-b"
               )}
             >
               <time dateTime={format(day, "yyyy-MM-dd")}>
                 {format(day, "d")}
               </time>
             </button>
-            <div className="mx-auto mt-1 h-1 w-1">
-              {events.some((meeting) =>
-                isSameDay(parseISO(meeting.startDatetime), day)
-              ) && (
-                <div className="h-1 w-1 rounded-full bg-secondary-600"></div>
-              )}
-            </div>
+
+            {events.some((meeting) =>
+              isSameDay(parseISO(meeting.startDatetime), day)
+            ) && (
+              <button
+                type="button"
+                className="my-1 h-2 w-3/4 bg-secondary-300"
+              ></button>
+            )}
           </div>
         ))}
       </div>
@@ -157,4 +161,4 @@ const Calendar = ({
   );
 };
 
-export default Calendar;
+export default MonthlyView;

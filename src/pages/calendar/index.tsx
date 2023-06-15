@@ -8,12 +8,10 @@ import {
   parseISO,
   startOfToday,
 } from "date-fns";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
-import Calendar from "~/components/Calendar";
+import Calendar from "~/components/MonthlyView";
 import DashboardLayout from "~/components/DashboardLayout";
-import Event from "~/components/Event";
-import WeeklySchedule from "~/components/WeeklySchedule";
+import DailyView from "~/components/DailyView";
 import { type NextPageWithLayout } from "../_app";
 
 const events = [
@@ -53,8 +51,6 @@ const events = [
 ];
 
 const CalendarPage: NextPageWithLayout = () => {
-  const session = useSession();
-
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -81,7 +77,6 @@ const CalendarPage: NextPageWithLayout = () => {
   return (
     <>
       <h1 className="mb-4 text-4xl font-bold text-primary-600">Calendar</h1>
-      <WeeklySchedule />
       <section className="mt-4 grid grid-cols-12">
         <Calendar
           firstDayCurrentMonth={firstDayCurrentMonth}
@@ -92,23 +87,10 @@ const CalendarPage: NextPageWithLayout = () => {
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
-        <section className="col-span-12 row-span-1 p-8 md:col-span-6">
-          <h2 className="py-4 text-2xl font-semibold">
-            Schedule for{" "}
-            <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
-              {format(selectedDay, "MMM dd, yyy")}
-            </time>
-          </h2>
-          <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
-            {selectedDayMeetings.length > 0 ? (
-              selectedDayMeetings.map((meeting) => (
-                <Event meeting={meeting} key={meeting.id} />
-              ))
-            ) : (
-              <p>No events for today.</p>
-            )}
-          </ol>
-        </section>
+        <DailyView
+          selectedDay={selectedDay}
+          selectedDayMeetings={selectedDayMeetings}
+        />
         <section className="col-span-12 row-span-1 p-8 md:col-span-6 lg:col-start-7">
           <h2 className="mb-2 font-semibold uppercase tracking-wider">
             Create New Event
