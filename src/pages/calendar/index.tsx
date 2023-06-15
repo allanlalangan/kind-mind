@@ -13,6 +13,7 @@ import Calendar from "~/components/MonthlyView";
 import DashboardLayout from "~/components/DashboardLayout";
 import DailyView from "~/components/DailyView";
 import { type NextPageWithLayout } from "../_app";
+import CreateEvent from "~/components/CreateEvent";
 
 const events = [
   {
@@ -91,19 +92,7 @@ const CalendarPage: NextPageWithLayout = () => {
           selectedDay={selectedDay}
           selectedDayMeetings={selectedDayMeetings}
         />
-        <section className="col-span-12 row-span-1 p-8 md:col-span-6 lg:col-start-7">
-          <h2 className="mb-2 font-semibold uppercase tracking-wider">
-            Create New Event
-          </h2>
-          <div className="grid grid-cols-12 gap-2">
-            <button className="col-span-6 flex w-full justify-center rounded bg-base-100/40 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal tracking-wide transition hover:bg-accent-300 active:bg-accent-400">
-              Add Activity
-            </button>
-            <button className="col-span-6 flex w-full justify-center rounded bg-base-100/40 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal tracking-wide transition hover:bg-accent-300 active:bg-accent-400">
-              Add Dose
-            </button>
-          </div>
-        </section>
+        <CreateEvent />
       </section>
     </>
   );
