@@ -8,13 +8,12 @@ import {
   parseISO,
   startOfToday,
 } from "date-fns";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
-import Calendar from "~/components/Calendar";
+import Calendar from "~/components/MonthlyView";
 import DashboardLayout from "~/components/DashboardLayout";
-import Event from "~/components/Event";
-import WeeklySchedule from "~/components/WeeklySchedule";
+import DailyView from "~/components/DailyView";
 import { type NextPageWithLayout } from "../_app";
+import CreateEvent from "~/components/CreateEvent";
 
 const events = [
   {
@@ -53,8 +52,6 @@ const events = [
 ];
 
 const CalendarPage: NextPageWithLayout = () => {
-  const session = useSession();
-
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -81,7 +78,6 @@ const CalendarPage: NextPageWithLayout = () => {
   return (
     <>
       <h1 className="mb-4 text-4xl font-bold text-primary-600">Calendar</h1>
-      <WeeklySchedule />
       <section className="mt-4 grid grid-cols-12">
         <Calendar
           firstDayCurrentMonth={firstDayCurrentMonth}
@@ -92,36 +88,11 @@ const CalendarPage: NextPageWithLayout = () => {
           selectedDay={selectedDay}
           setSelectedDay={setSelectedDay}
         />
-        <section className="col-span-12 row-span-1 p-8 md:col-span-6">
-          <h2 className="py-4 text-2xl font-semibold">
-            Schedule for{" "}
-            <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
-              {format(selectedDay, "MMM dd, yyy")}
-            </time>
-          </h2>
-          <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
-            {selectedDayMeetings.length > 0 ? (
-              selectedDayMeetings.map((meeting) => (
-                <Event meeting={meeting} key={meeting.id} />
-              ))
-            ) : (
-              <p>No events for today.</p>
-            )}
-          </ol>
-        </section>
-        <section className="col-span-12 row-span-1 p-8 md:col-span-6 lg:col-start-7">
-          <h2 className="mb-2 font-semibold uppercase tracking-wider">
-            Create New Event
-          </h2>
-          <div className="grid grid-cols-12 gap-2">
-            <button className="col-span-6 flex w-full justify-center rounded bg-base-100/40 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal tracking-wide transition hover:bg-accent-300 active:bg-accent-400">
-              Add Activity
-            </button>
-            <button className="col-span-6 flex w-full justify-center rounded bg-base-100/40 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal tracking-wide transition hover:bg-accent-300 active:bg-accent-400">
-              Add Dose
-            </button>
-          </div>
-        </section>
+        <DailyView
+          selectedDay={selectedDay}
+          selectedDayMeetings={selectedDayMeetings}
+        />
+        <CreateEvent />
       </section>
     </>
   );

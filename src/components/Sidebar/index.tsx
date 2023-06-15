@@ -23,13 +23,13 @@ const Sidebar = ({ navIsOpen, setNavIsOpen }: SidebarProps) => {
       >
         <div
           onClick={() => setNavIsOpen(false)}
-          className="fixed inset-0 z-20 bg-gray-500 bg-opacity-75 transition-opacity md:pointer-events-none md:hidden"
+          className="fixed inset-0 z-[9] bg-gray-500 bg-opacity-75 transition-opacity md:pointer-events-none md:hidden"
         />
       </Transition>
       <aside
         className={`${
           navIsOpen ? "" : "-translate-x-full"
-        } fixed bottom-0 left-0 top-0 z-[21] flex w-1/2 flex-col items-center justify-start bg-base-100/50 p-2 pt-4 shadow-md backdrop-blur-md transition delay-75 ease-in md:bottom-2 md:left-2 md:top-16 md:h-auto md:w-36 md:-translate-x-0 md:rounded md:bg-base-100/40 md:pt-2`}
+        } fixed bottom-0 left-0 top-0 z-10 flex w-1/2 flex-col items-center justify-start bg-base-100/50 p-2 pt-4 shadow-md backdrop-blur-md transition delay-75 ease-in md:bottom-2 md:left-2 md:top-16 md:h-auto md:w-36 md:-translate-x-0 md:rounded md:bg-base-100/40 md:pt-2`}
       >
         <div
           onClick={() => setNavIsOpen(false)}
