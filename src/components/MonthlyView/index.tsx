@@ -108,6 +108,7 @@ const MonthlyView = ({
           <div
             key={day.toString()}
             className={classNames(
+              dayIdx === 0 && colStartClasses[getDay(day)],
               !isEqual(day, selectedDay) &&
                 isToday(day) &&
                 "text-secondary-500",
@@ -129,7 +130,6 @@ const MonthlyView = ({
               type="button"
               onClick={() => setSelectedDay(day)}
               className={classNames(
-                dayIdx === 0 && colStartClasses[getDay(day)],
                 isEqual(day, selectedDay) &&
                   isToday(day) &&
                   "border-secondary-500 bg-secondary-500 text-white",

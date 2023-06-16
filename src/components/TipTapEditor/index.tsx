@@ -31,7 +31,7 @@ export default function TipTapEditor({
   return (
     <>
       {isEditable && (
-        <section className="z-10 -mx-4 bg-base-900 pb-2 shadow-md md:pt-2">
+        <section className="-mx-4 bg-base-900 pb-2 shadow-md md:pt-2">
           <div className="">
             <input
               onChange={(e) => setTitleInputValue(e.target.value)}
