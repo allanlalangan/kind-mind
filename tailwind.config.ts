@@ -15,6 +15,7 @@ export default {
     },
   },
   plugins: [
+    require("postcss-100vh-fix"),
     plugin(function ({ addUtilities, addComponents, e, config }) {
       // Add your custom styles here
       const notchClasses = {
