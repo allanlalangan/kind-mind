@@ -16,7 +16,7 @@ export default function DialogModal({
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="section"
-        className="fixed inset-0 z-10 flex items-end justify-center overflow-y-auto p-2 md:items-center"
+        className="fixed inset-0 z-10 flex items-start justify-center overflow-y-auto p-2 md:items-center"
         onClose={() => handleClose()}
       >
         <Transition.Child
