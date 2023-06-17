@@ -16,7 +16,7 @@ export default function DialogModal({
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="section"
-        className="fixed inset-0 z-10 flex min-h-full items-end justify-center overflow-y-auto p-4 text-center sm:items-center sm:p-0"
+        className="fixed inset-0 z-10 flex items-start justify-center overflow-y-auto p-2 md:items-center"
         onClose={() => handleClose()}
       >
         <Transition.Child
@@ -28,7 +28,10 @@ export default function DialogModal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <Dialog.Backdrop
+            as="div"
+            className="fixed inset-0 z-10 bg-gray-500 bg-opacity-75 transition-opacity"
+          />
         </Transition.Child>
 
         <Transition.Child
@@ -43,7 +46,7 @@ export default function DialogModal({
           {
             <Dialog.Panel
               as="section"
-              className="relative w-full transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+              className="w-full transform rounded-lg bg-white shadow-xl transition-all sm:w-full sm:max-w-lg"
             >
               {children}
             </Dialog.Panel>
