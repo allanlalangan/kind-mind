@@ -9,6 +9,7 @@ import DialogModal from "~/components/DialogModal";
 import TipTapEditor from "~/components/TipTapEditor";
 import { type NextPageWithLayout } from "~/pages/_app";
 import { api } from "~/utils/api";
+import { toast } from "react-hot-toast";
 
 const CreateJournalEntryPage: NextPageWithLayout = () => {
   const session = useSession();
@@ -16,6 +17,7 @@ const CreateJournalEntryPage: NextPageWithLayout = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [titleInputValue, setTitleInputValue] = useState("");
+
   const [tempContent, setTempContent] = useState("");
 
   const editor = useEditor({
@@ -51,6 +53,10 @@ const CreateJournalEntryPage: NextPageWithLayout = () => {
       onSuccess: (data) => {
         console.log("createEntry success");
         void router.push("/journal");
+        toast.success("Entry created successfully");
+      },
+      onError: (error) => {
+        toast.error("Something went wrong");
       },
     });
   } else {
@@ -58,6 +64,10 @@ const CreateJournalEntryPage: NextPageWithLayout = () => {
       onSuccess: (data) => {
         console.log("createEntry success");
         void router.push("/journal");
+        toast.success("Entry created successfully");
+      },
+      onError: (error) => {
+        toast.error("Something went wrong");
       },
     });
   }
@@ -66,7 +76,7 @@ const CreateJournalEntryPage: NextPageWithLayout = () => {
 
   const onSubmit = () => {
     if (editor?.isEmpty) {
-      console.log("Editor is empty, please add some content");
+      toast.error("Editor is empty, please add some content");
     } else {
       console.log(tempContent);
       console.log(titleInputValue);

@@ -4,14 +4,17 @@ import DialogModal from "../DialogModal";
 import Link from "next/link";
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 type EntryActionsDropdownMenuProps = {
   id: string;
+  title: string;
   refetchEntries: () => void;
 };
 
 export default function EntryActionsDropdownMenu({
   id,
+  title,
   refetchEntries,
 }: EntryActionsDropdownMenuProps) {
   const session = useSession();
@@ -22,14 +25,14 @@ export default function EntryActionsDropdownMenu({
   if (!session.data?.user) {
     deleteEntry = api.guestEntries.deleteEntry.useMutation({
       onSuccess: () => {
-        console.log(`public delete entry ${id} success}`);
+        toast.success(`Deleted journal entry: ${title}`);
         refetchEntries();
       },
     });
   } else {
     deleteEntry = api.entries.deleteEntry.useMutation({
       onSuccess: () => {
-        console.log(`delete entry ${id} success}`);
+        toast.success(`Deleted journal entry: ${title}`);
         refetchEntries();
       },
     });
