@@ -10,6 +10,7 @@ import LoadingSpinner from "~/components/LoadingSpinner";
 import TipTapEditor from "~/components/TipTapEditor";
 import { type NextPageWithLayout } from "~/pages/_app";
 import { api } from "~/utils/api";
+import { toast } from "react-hot-toast";
 
 const JournalEntryPage: NextPageWithLayout = () => {
   const session = useSession();
@@ -121,6 +122,7 @@ const JournalEntryPage: NextPageWithLayout = () => {
       content: tempContent || "",
     });
     setIsEditable(false);
+    toast.success("Entry saved");
   };
 
   return (

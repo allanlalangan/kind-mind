@@ -53,6 +53,7 @@ const JournalPage: NextPageWithLayout = () => {
               <EntryActionsDropdownMenu
                 refetchEntries={() => void refetchEntries()}
                 id={entry.id}
+                title={entry.title}
               />
             </li>
           ))}

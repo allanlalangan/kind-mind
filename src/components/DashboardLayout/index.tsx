@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "~/components/Header";
 import Sidebar from "~/components/Sidebar";
+import CustomToaster from "../CustomToaster";
 
 export default function DashboardLayout({
   children,
@@ -50,6 +51,7 @@ export default function DashboardLayout({
       <main className="min-h-screen w-full rounded bg-base-100/40 p-4 shadow-md md:fixed md:bottom-2 md:left-40 md:right-2 md:top-16 md:h-auto md:min-h-0 md:w-auto md:overflow-y-scroll">
         {children}
       </main>
+      <CustomToaster />
     </>
   );
 }
